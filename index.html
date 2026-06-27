@@ -3,61 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Tools Dashboard</title>
+    <title>netprivacycheck – Privacy Diagnostics</title>
 
     <!-- SEO -->
-    <meta name="description" content="Check your IP, DNS leaks, WebRTC leaks, browser fingerprint and privacy exposure instantly.">
+    <meta name="description" content="Instant privacy diagnostics: IP, DNS leak, WebRTC leak, fingerprint exposure.">
     <link rel="canonical" href="https://netprivacycheck.com">
 
-    <!-- OpenGraph -->
     <meta property="og:title" content="Privacy Tools – IP, DNS Leak, WebRTC, Fingerprint Tests">
     <meta property="og:description" content="Instant privacy exposure check: IP, DNS leaks, WebRTC leaks, fingerprinting.">
     <meta property="og:url" content="https://netprivacycheck.com">
     <meta property="og:image" content="https://netprivacycheck.com/assets/preview.png">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Privacy Tools – IP, DNS Leak, WebRTC, Fingerprint Tests">
-    <meta name="twitter:description" content="Instant privacy exposure check: IP, DNS leaks, WebRTC leaks, fingerprinting.">
-    <meta name="twitter:image" content="https://netprivacycheck.com/assets/preview.png">
-    <meta name="twitter:url" content="https://netprivacycheck.com">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Top Navigation -->
+    <!-- TOP BAR -->
     <header class="topbar">
-        <div class="topbar-left">
-            <button id="menu-btn" class="hamburger">☰</button>
-            <span class="brand">netprivacycheck</span>
-        </div>
-
-        <nav class="topnav">
+        <div class="brand">netprivacycheck</div>
+        <nav class="nav">
             <a href="#ip">IP</a>
-            <a href="#dns">DNS Leak</a>
+            <a href="#dns">DNS</a>
             <a href="#webrtc">WebRTC</a>
             <a href="#fingerprint">Fingerprint</a>
         </nav>
     </header>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu">
-        <button id="close-menu" class="close-btn">×</button>
-        <a href="#ip">IP</a>
-        <a href="#dns">DNS Leak</a>
-        <a href="#webrtc">WebRTC</a>
-        <a href="#fingerprint">Fingerprint</a>
-    </div>
-
-    <!-- Main Content -->
+    <!-- MAIN CONTENT -->
     <main class="container">
 
-        <!-- IP Card -->
+        <!-- IP CARD -->
         <section id="ip" class="card">
             <h2>IP Exposure</h2>
-            <p class="desc">Static placeholders — functionality can be added later.</p>
+            <p class="desc">Your public IP and metadata.</p>
 
             <div class="grid">
                 <div class="item"><span>IP Address</span><strong id="ip-result">Your IP will appear here</strong></div>
@@ -95,6 +74,5 @@
         © 2026 netprivacycheck
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
