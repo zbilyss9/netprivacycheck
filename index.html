@@ -1,114 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Privacy Tools – Full Preview</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Privacy Audit | IP, DNS & WebRTC Leak Test</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<header>
-  <img src="assets/images/logo.png" alt="Privacy Tools Logo" class="site-logo">
-</header>
+<div class="container">
+    <h1>Privacy Shield Audit</h1>
+    <p class="subtitle">🔒 Zero Logs. 100% Client-Side Detection.</p>
 
-<!-- PUBLIC IP SECTION -->
-<section id="homepage">
-
-  <h2>Your Public IP Address</h2>
-  <div class="ip-box">
-    <div class="ip-label">IP Address</div>
-    <div class="ip-value" id="ip-value">Detecting…</div>
-
-    <div class="grid" style="margin-top:1rem;">
-      <div>
-        <div class="ip-label">Location</div>
-        <div class="ip-value" id="ip-location">Unknown</div>
-      </div>
-      <div>
-        <div class="ip-label">ISP</div>
-        <div class="ip-value" id="ip-isp">Unknown</div>
-      </div>
+    <!-- 1. WHAT IS MY IP CARD -->
+    <div class="card">
+        <div class="card-title">Public IP Address <span class="badge">HTTP Request</span></div>
+        <p class="result-text" id="public-ip">Detecting...</p>
     </div>
-  </div>
 
-  <h2>Run a Full Privacy Check</h2>
-  <div class="grid">
-    <div class="card"><h3>DNS Leak Test</h3><a href="#dns">Go →</a></div>
-    <div class="card"><h3>WebRTC Leak Test</h3><a href="#webrtc">Go →</a></div>
-    <div class="card"><h3>Browser Fingerprint</h3><a href="#fingerprint">Go →</a></div>
-    <div class="card"><h3>User Agent</h3><a href="#ua">Go →</a></div>
-    <div class="card"><h3>Port Checker</h3><a href="#port">Go →</a></div>
-  </div>
+    <!-- 2. WEBRTC LEAK TEST CARD -->
+    <div class="card">
+        <div class="card-title">WebRTC Local Interface IP <span class="badge">Browser API</span></div>
+        <p class="result-text" id="webrtc-ip">Scanning Browser...</p>
+    </div>
 
-</section>
+    <!-- 3. DNS LEAK CARD -->
+    <div class="card">
+        <div class="card-title">DNS Server Country Resolve <span class="badge">Geolocated</span></div>
+        <p class="result-text" id="dns-country">Analyzing Location...</p>
+    </div>
 
-<!-- DNS -->
-<section id="dns">
-  <h2 class="page-title">DNS Leak Test</h2>
-  <p>This is where the DNS leak test UI will go.</p>
-</section>
+    <div class="info-footer">
+        <strong>Why use this?</strong> If you are using a VPN and your WebRTC Local IP displays your real home router gateway IP (e.g., 192.168.x.x) or your true ISP location, your browser is actively leaking your identity!
+    </div>
+</div>
 
-<!-- WEBRTC -->
-<section id="webrtc">
-  <h2 class="page-title">WebRTC Leak Test</h2>
-  <p>This is where WebRTC leak detection will appear.</p>
-</section>
+<!-- External JS -->
+<script src="assets/js/main.js"></script>
 
-<!-- FINGERPRINT -->
-<section id="fingerprint">
-  <h2 class="page-title">Browser Fingerprint Test</h2>
-  <p>This is where fingerprinting results will appear.</p>
-</section>
-
-<!-- USER AGENT -->
-<section id="ua">
-  <h2 class="page-title">User Agent Viewer</h2>
-  <p>Your user agent will appear here.</p>
-</section>
-
-<!-- PORT CHECK -->
-<section id="port">
-  <h2 class="page-title">Port Checker</h2>
-  <p>Port scanning UI will appear here.</p>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-  <h2 class="page-title">FAQ</h2>
-
-  <div class="faq-item">
-    <h3>What is my IP?</h3>
-    <p>Your IP is your public identifier on the internet.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>What is a DNS leak?</h3>
-    <p>A DNS leak exposes your DNS requests even when using a VPN.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>What is a WebRTC leak?</h3>
-    <p>WebRTC can reveal your real IP address through browser technology.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>What is a Browser Fingerprint?</h3>
-    <p>A fingerprint is a unique combination of browser settings that can track you.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>What is a User Agent?</h3>
-    <p>Your user agent tells websites what browser and device you are using.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>What is a Port Checker?</h3>
-    <p>A port checker tests if a specific port on your network is open or closed.</p>
-  </div>
-
-</section>
-
-<script src="script.js"></script>
 </body>
 </html>
