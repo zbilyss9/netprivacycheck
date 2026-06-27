@@ -9,23 +9,21 @@ body {
   padding-bottom: 4rem;
 }
 
-/* HEADER + LOGO TEXT */
+/* HEADER WITH BIG LOGO */
 header {
   position: sticky;
   top: 0;
   background: #0b1020;
-  padding: 1.5rem 1.25rem 1rem;
+  padding: 2rem 1.25rem 1.5rem;
   border-bottom: 1px solid #222842;
   z-index: 999;
   text-align: center;
 }
-.logo-text {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #6fb6ff;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  filter: drop-shadow(0 0 8px #00aaff);
+.site-logo {
+  height: 160px;
+  width: auto;
+  display: inline-block;
+  filter: drop-shadow(0 0 12px #00aaff);
 }
 
 /* CONTENT */
@@ -81,6 +79,30 @@ section {
 
 h2 { margin-top: 1.75rem; margin-bottom: 0.75rem; font-size: 1.35rem; }
 h3 { margin-bottom: 0.5rem; font-size: 1.15rem; }
+
+.faq-item {
+  background: #151a30;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #252b45;
+}
+.faq-item h3 {
+  font-size: 1.1rem;
+  cursor: pointer;
+  position: relative;
+  padding-right: 1.5rem;
+}
+.faq-item h3::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1.3rem;
+}
+.faq-item.open h3::after { content: "-"; }
+.faq-item p { display: none; margin-top: 0.5rem; }
+.faq-item.open p { display: block; }
 
 .page-title {
   font-size: 2rem;
