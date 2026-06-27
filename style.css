@@ -1,9 +1,22 @@
-/* GENERAL */
 body {
     margin: 0;
     background: #0f0f0f;
     color: #fff;
     font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 900px;
+    margin: 120px auto 40px auto;
+    padding: 20px;
+}
+
+/* TOOL BOX */
+.tool-box {
+    background: #151515;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
 }
 
 /* NAVIGATION */
@@ -76,8 +89,8 @@ nav {
     font-size: 20px;
 }
 
-/* TOOL BOXES */
-.tool-box {
-    margin-top: 100px;
+footer {
+    text-align: center;
     padding: 20px;
+    color: #777;
 }
