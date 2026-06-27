@@ -2,9 +2,9 @@
 
 function initDesignPlaceholders() {
     const ids = [
-        'public-ip', 'webrtc-ip', 'dns-country', 'fingerprint',
-        'vpn-status', 'device-meta', 'connection-meta',
-        'security-headers', 'doh-status', 'webrtc-block', 'summary'
+        'public-ip', 'dns-country', 'vpn-status', 'connection-meta',
+        'webrtc-ip', 'webrtc-block', 'fingerprint', 'device-meta',
+        'security-headers', 'doh-status', 'summary'
     ];
 
     ids.forEach(id => {
