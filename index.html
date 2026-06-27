@@ -1,78 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>netprivacycheck – Privacy Diagnostics</title>
-
-    <!-- SEO -->
-    <meta name="description" content="Instant privacy diagnostics: IP, DNS leak, WebRTC leak, fingerprint exposure.">
-    <link rel="canonical" href="https://netprivacycheck.com">
-
-    <meta property="og:title" content="Privacy Tools – IP, DNS Leak, WebRTC, Fingerprint Tests">
-    <meta property="og:description" content="Instant privacy exposure check: IP, DNS leaks, WebRTC leaks, fingerprinting.">
-    <meta property="og:url" content="https://netprivacycheck.com">
-    <meta property="og:image" content="https://netprivacycheck.com/assets/preview.png">
-
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>netprivacycheck</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- TOP BAR -->
-    <header class="topbar">
-        <div class="brand">netprivacycheck</div>
-        <nav class="nav">
-            <a href="#ip">IP</a>
-            <a href="#dns">DNS</a>
-            <a href="#webrtc">WebRTC</a>
-            <a href="#fingerprint">Fingerprint</a>
-        </nav>
-    </header>
+<div class="topbar">
+  <div class="logo">netprivacycheck</div>
+</div>
 
-    <!-- MAIN CONTENT -->
-    <main class="container">
+<section class="hero">
+  <h1>Online Privacy Diagnostics</h1>
+  <p>Check your IP, DNS, WebRTC, and browser fingerprint instantly.</p>
 
-        <!-- IP CARD -->
-        <section id="ip" class="card glow">
-            <h2>IP Exposure</h2>
-            <p class="desc">Your public IP and metadata.</p>
+  <div class="central-wrapper">
+    <div class="central-card">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="ring r3"></div>
 
-            <div class="grid">
-                <div class="item"><span>IP Address</span><strong id="ip-result">Your IP will appear here</strong></div>
-                <div class="item"><span>Location</span><strong id="location-result">Location will appear here</strong></div>
-                <div class="item"><span>ISP</span><strong id="isp-result">ISP will appear here</strong></div>
-                <div class="item"><span>ASN</span><strong id="asn-result">ASN will appear here</strong></div>
-                <div class="item"><span>Timezone</span><strong id="timezone-result">Timezone will appear here</strong></div>
-            </div>
-        </section>
+      <div class="central-value">IP</div>
+      <div class="central-label">Primary Privacy Status</div>
+    </div>
+  </div>
+</section>
 
-        <!-- DNS -->
-        <section id="dns" class="card glow">
-            <h2>DNS Leak Test</h2>
-            <p class="desc">Detect DNS exposure.</p>
-            <div class="placeholder">DNS leak diagnostics will be added here.</div>
-        </section>
+<section class="tools">
+  <div class="tool-card">
+    <h3>IP Exposure</h3>
+    <p>Your public IP and metadata.</p>
+    <div class="tool-grid">
+      <div class="tool-item"><strong>IP Address</strong><br>Your IP will appear here</div>
+      <div class="tool-item"><strong>Location</strong><br>Location will appear here</div>
+      <div class="tool-item"><strong>ISP</strong><br>ISP will appear here</div>
+      <div class="tool-item"><strong>ASN</strong><br>ASN will appear here</div>
+      <div class="tool-item"><strong>Timezone</strong><br>Timezone will appear here</div>
+    </div>
+  </div>
 
-        <!-- WebRTC -->
-        <section id="webrtc" class="card glow">
-            <h2>WebRTC Leak Test</h2>
-            <p class="desc">Check if WebRTC reveals your real IP.</p>
-            <div class="placeholder">WebRTC leak checks will be added here.</div>
-        </section>
+  <div class="tool-card">
+    <h3>DNS Leak Test</h3>
+    <p>Detect DNS exposure.</p>
+    <div class="tool-item">DNS leak diagnostics will be added here.</div>
+  </div>
 
-        <!-- Fingerprint -->
-        <section id="fingerprint" class="card glow">
-            <h2>Browser Fingerprint</h2>
-            <p class="desc">Analyze browser uniqueness.</p>
-            <div class="placeholder">Fingerprint metrics will be added here.</div>
-        </section>
+  <div class="tool-card">
+    <h3>WebRTC Leak Test</h3>
+    <p>Find exposed local and public IPs via WebRTC.</p>
+    <div class="tool-item">WebRTC leak diagnostics will be added here.</div>
+  </div>
 
-    </main>
-
-    <footer class="footer">
-        © 2026 netprivacycheck
-    </footer>
+  <div class="tool-card">
+    <h3>Fingerprint</h3>
+    <p>Analyze browser, device, canvas, audio, and WebGL fingerprints.</p>
+    <div class="tool-item">Fingerprint diagnostics will be added here.</div>
+  </div>
+</section>
 
 </body>
 </html>
