@@ -9,19 +9,21 @@ body {
   padding-bottom: 4rem;
 }
 
-/* HEADER FIXED SPACING */
+/* HEADER WITH LOGO */
 header {
   position: sticky;
   top: 0;
   background: #0b1020;
-  padding: 1.5rem 1.25rem 1rem;
+  padding: 1.25rem 1.25rem 1rem;
   border-bottom: 1px solid #222842;
   z-index: 999;
   text-align: center;
 }
-header h1 {
-  font-size: 1.6rem;
-  margin: 0;
+.site-logo {
+  height: 80px;
+  width: auto;
+  display: inline-block;
+  filter: drop-shadow(0 0 8px #00aaff);
 }
 
 section {
