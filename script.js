@@ -1,4 +1,3 @@
-// 1. FETCH PUBLIC IP & LOCATION (Using free, zero-auth public APIs)
 async function fetchIPData() {
     try {
         const response = await fetch('https://ipapi.co');
@@ -12,7 +11,6 @@ async function fetchIPData() {
     }
 }
 
-// 2. TRUE WEBRTC LEAK DETECTION VIA BROWSER STUN
 function testWebRTC() {
     const webrtcElement = document.getElementById('webrtc-ip');
     
@@ -50,6 +48,5 @@ function testWebRTC() {
     };
 }
 
-// Initialize both background tests instantly on load
 fetchIPData();
 testWebRTC();
