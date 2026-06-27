@@ -3,131 +3,95 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- SEO TITLE -->
-    <title>Privacy Shield Audit | IP, DNS, WebRTC & Fingerprint Leak Test</title>
-
-    <!-- SEO META DESCRIPTION -->
-    <meta name="description" content="Instant privacy audit tool that checks your IP address, DNS leaks, WebRTC leaks, fingerprinting exposure, VPN status, device metadata, and connection security. 100% client-side.">
-
-    <!-- SEO KEYWORDS -->
-    <meta name="keywords" content="privacy audit, IP leak test, DNS leak test, WebRTC leak test, fingerprinting test, VPN detection, privacy tool, online privacy check">
-
-    <!-- CANONICAL URL -->
-    <link rel="canonical" href="https://yourdomain.com/">
-
-    <!-- VIEWPORT -->
+    <title>Privacy Shield Audit | Clean Dashboard</title>
+    <meta name="description" content="Professional privacy audit dashboard showing IP, DNS, WebRTC, fingerprint, VPN status, device metadata and more.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ROBOTS -->
-    <meta name="robots" content="index, follow">
-
-    <!-- OPEN GRAPH -->
-    <meta property="og:title" content="Privacy Shield Audit | IP, DNS, WebRTC Leak Test">
-    <meta property="og:description" content="Check your IP, DNS, WebRTC, fingerprint, VPN status and more. Full privacy audit.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourdomain.com/">
-    <meta property="og:image" content="https://yourdomain.com/preview.png">
-
-    <!-- TWITTER CARD -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Privacy Shield Audit">
-    <meta name="twitter:description" content="Instant privacy audit: IP, DNS, WebRTC, fingerprint, VPN status.">
-    <meta name="twitter:image" content="https://yourdomain.com/preview.png">
-
-    <!-- FAVICON -->
-    <link rel="icon" href="favicon.ico">
-
-    <!-- SEO STRUCTURED DATA -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Privacy Shield Audit",
-        "description": "Instant privacy audit tool that checks IP, DNS, WebRTC, fingerprinting, VPN status, device metadata, and connection security.",
-        "url": "https://yourdomain.com/"
-    }
-    </script>
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<header class="topbar">
+    <div class="topbar-title">Privacy Shield Audit</div>
+</header>
+
 <div class="container">
 
-    <h1>Privacy Shield Audit</h1>
-    <p class="subtitle">🔒 Zero Logs. 100% Client-Side Detection.</p>
+    <!-- NETWORK SECTION -->
+    <h2 class="section-title">Network</h2>
 
-    <!-- PUBLIC IP -->
-    <div class="card">
-        <div class="card-title">Public IP Address <span class="badge">HTTP Request</span></div>
-        <p class="result-text" id="public-ip">Waiting...</p>
+    <div class="grid">
+        <div class="card">
+            <div class="card-title">Public IP <span class="badge">Network</span></div>
+            <p class="result-text" id="public-ip">Waiting...</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">DNS Resolver <span class="badge">DNS</span></div>
+            <p class="result-text" id="dns-country">Waiting...</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">VPN Status <span class="badge">ASN</span></div>
+            <p class="result-text" id="vpn-status">Waiting...</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Connection Info <span class="badge">Network</span></div>
+            <p class="result-text" id="connection-meta">Waiting...</p>
+        </div>
     </div>
 
-    <!-- WEBRTC -->
-    <div class="card">
-        <div class="card-title">WebRTC Local Interface IP <span class="badge">Browser API</span></div>
-        <p class="result-text" id="webrtc-ip">Waiting...</p>
+    <!-- BROWSER SECTION -->
+    <h2 class="section-title">Browser</h2>
+
+    <div class="grid">
+        <div class="card">
+            <div class="card-title">WebRTC IP <span class="badge">Browser</span></div>
+            <p class="result-text" id="webrtc-ip">Waiting...</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">WebRTC Protection <span class="badge">Browser</span></div>
+            <p class="result-text" id="webrtc-block">Waiting...</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Fingerprint <span class="badge">Entropy</span></div>
+            <p class="result-text" id="fingerprint">Waiting...</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Device Info <span class="badge">Client</span></div>
+            <p class="result-text" id="device-meta">Waiting...</p>
+        </div>
     </div>
 
-    <!-- DNS -->
-    <div class="card">
-        <div class="card-title">DNS Resolver Location <span class="badge">Geolocated</span></div>
-        <p class="result-text" id="dns-country">Waiting...</p>
-    </div>
+    <!-- SECURITY SECTION -->
+    <h2 class="section-title">Security</h2>
 
-    <!-- FINGERPRINT -->
-    <div class="card">
-        <div class="card-title">Browser Fingerprint <span class="badge">Entropy</span></div>
-        <p class="result-text" id="fingerprint">Waiting...</p>
-    </div>
+    <div class="grid">
+        <div class="card">
+            <div class="card-title">Security Headers <span class="badge">Browser</span></div>
+            <p class="result-text" id="security-headers">Waiting...</p>
+        </div>
 
-    <!-- VPN DETECTION -->
-    <div class="card">
-        <div class="card-title">VPN / Proxy Status <span class="badge">ASN Check</span></div>
-        <p class="result-text" id="vpn-status">Waiting...</p>
-    </div>
+        <div class="card">
+            <div class="card-title">DNS-over-HTTPS <span class="badge">Encrypted</span></div>
+            <p class="result-text" id="doh-status">Waiting...</p>
+        </div>
 
-    <!-- DEVICE METADATA -->
-    <div class="card">
-        <div class="card-title">Device Metadata <span class="badge">Client Info</span></div>
-        <p class="result-text" id="device-meta">Waiting...</p>
-    </div>
-
-    <!-- CONNECTION METADATA -->
-    <div class="card">
-        <div class="card-title">Connection Metadata <span class="badge">Network</span></div>
-        <p class="result-text" id="connection-meta">Waiting...</p>
-    </div>
-
-    <!-- SECURITY HEADERS -->
-    <div class="card">
-        <div class="card-title">Security Headers <span class="badge">Browser</span></div>
-        <p class="result-text" id="security-headers">Waiting...</p>
-    </div>
-
-    <!-- DOH -->
-    <div class="card">
-        <div class="card-title">DNS-over-HTTPS Status <span class="badge">Encrypted</span></div>
-        <p class="result-text" id="doh-status">Waiting...</p>
-    </div>
-
-    <!-- WEBRTC BLOCK -->
-    <div class="card">
-        <div class="card-title">WebRTC Leak Protection <span class="badge">Browser</span></div>
-        <p class="result-text" id="webrtc-block">Waiting...</p>
-    </div>
-
-    <!-- SUMMARY -->
-    <div class="card">
-        <div class="card-title">Privacy Summary <span class="badge">Score</span></div>
-        <p class="result-text" id="summary">Waiting...</p>
-    </div>
-
-    <div class="info-footer">
-        <strong>Design Mode:</strong> All modules are placeholders. No detection logic yet.
+        <div class="card">
+            <div class="card-title">Privacy Score <span class="badge">Summary</span></div>
+            <p class="result-text" id="summary">Waiting...</p>
+        </div>
     </div>
 
 </div>
+
+<footer class="footer">
+    © 2026 Privacy Shield Audit — Design Mode Only
+</footer>
 
 <script src="script.js"></script>
 </body>
