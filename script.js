@@ -1,23 +1,55 @@
-console.log("NetPrivacyCheck loaded.");
-
-// Simple module loader (future‑proof)
-async function loadModule(name) {
+// 1. FETCH PUBLIC IP & LOCATION
+async function fetchIPData() {
     try {
-        const module = await import(`./assets/scripts/${name}.js`);
-        module.run();
-    } catch (err) {
-        console.warn(`Module ${name} not found or not ready.`);
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        
+        document.getElementById('public-ip').innerText = `${data.ip} (${data.org})`;
+        document.getElementById('dns-country').innerText = `${data.city}, ${data.region}, ${data.country_name}`;
+    } catch (error) {
+        document.getElementById('public-ip').innerText = "Failed to detect IP";
+        document.getElementById('dns-country').innerText = "Failed to route location";
     }
 }
 
-// Example: auto‑load modules when user clicks a card
-document.querySelectorAll(".tool-card").forEach(card => {
-    card.addEventListener("click", () => {
-        const toolName = card.querySelector("h2").innerText
-            .toLowerCase()
-            .replace(" ", "")
-            .replace("test", "");
+// 2. TRUE WEBRTC LEAK DETECTION
+function testWebRTC() {
+    const webrtcElement = document.getElementById('webrtc-ip');
+    
+    window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+    
+    if (!window.RTCPeerConnection) {
+        webrtcElement.innerText = "Not Supported by Browser (Secure)";
+        return;
+    }
 
-        loadModule(toolName);
-    });
-});
+    const rtc = new RTCPeerConnection({ iceServers: [{ urls: "stun:stun.l.google.com:19302" }] });
+    rtc.createDataChannel(""); 
+    
+    rtc.createOffer().then(offer => rtc.setLocalDescription(offer));
+    
+    rtc.onicecandidate = (ice) => {
+        if (!ice || !ice.candidate || !ice.candidate.candidate) {
+            if (webrtcElement.innerText === "Scanning Browser...") {
+                webrtcElement.innerText = "No WebRTC Leak Detected";
+            }
+            return;
+        }
+        
+        const ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9:]+)/gi;
+        const candidate = ice.candidate.candidate;
+        const ipAddresses = candidate.match(ipRegex);
+
+        if (ipAddresses) {
+            ipAddresses.forEach(ip => {
+                if (ip.includes('.') || ip.includes(':')) {
+                    webrtcElement.innerText = ip;
+                }
+            });
+        }
+    };
+}
+
+// Initialize tests
+fetchIPData();
+testWebRTC();
