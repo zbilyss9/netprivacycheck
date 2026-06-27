@@ -3,39 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instant Privacy Audit | IP, DNS & WebRTC Leak Test</title>
-
-    <!-- Correct CSS path -->
+    <title>Privacy Shield Audit</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
+
     <h1>Privacy Shield Audit</h1>
     <p class="subtitle">🔒 Zero Logs. 100% Client-Side Detection.</p>
 
+    <!-- PUBLIC IP -->
     <div class="card">
         <div class="card-title">Public IP Address <span class="badge">HTTP Request</span></div>
-        <p class="result-text" id="public-ip">Detecting...</p>
+        <p class="result-text" id="public-ip">Waiting...</p>
     </div>
 
+    <!-- WEBRTC -->
     <div class="card">
         <div class="card-title">WebRTC Local Interface IP <span class="badge">Browser API</span></div>
-        <p class="result-text" id="webrtc-ip">Scanning Browser...</p>
+        <p class="result-text" id="webrtc-ip">Waiting...</p>
     </div>
 
+    <!-- DNS -->
     <div class="card">
-        <div class="card-title">DNS Server Country Resolve <span class="badge">Geolocated</span></div>
-        <p class="result-text" id="dns-country">Analyzing Location...</p>
+        <div class="card-title">DNS Resolver Location <span class="badge">Geolocated</span></div>
+        <p class="result-text" id="dns-country">Waiting...</p>
+    </div>
+
+    <!-- FINGERPRINT -->
+    <div class="card">
+        <div class="card-title">Browser Fingerprint <span class="badge">Entropy</span></div>
+        <p class="result-text" id="fingerprint">Waiting...</p>
+    </div>
+
+    <!-- VPN DETECTION -->
+    <div class="card">
+        <div class="card-title">VPN / Proxy Status <span class="badge">ASN Check</span></div>
+        <p class="result-text" id="vpn-status">Waiting...</p>
+    </div>
+
+    <!-- DEVICE METADATA -->
+    <div class="card">
+        <div class="card-title">Device Metadata <span class="badge">Client Info</span></div>
+        <p class="result-text" id="device-meta">Waiting...</p>
+    </div>
+
+    <!-- CONNECTION METADATA -->
+    <div class="card">
+        <div class="card-title">Connection Metadata <span class="badge">Network</span></div>
+        <p class="result-text" id="connection-meta">Waiting...</p>
+    </div>
+
+    <!-- SECURITY HEADERS -->
+    <div class="card">
+        <div class="card-title">Security Headers <span class="badge">Browser</span></div>
+        <p class="result-text" id="security-headers">Waiting...</p>
+    </div>
+
+    <!-- DOH -->
+    <div class="card">
+        <div class="card-title">DNS-over-HTTPS Status <span class="badge">Encrypted</span></div>
+        <p class="result-text" id="doh-status">Waiting...</p>
+    </div>
+
+    <!-- WEBRTC BLOCK -->
+    <div class="card">
+        <div class="card-title">WebRTC Leak Protection <span class="badge">Browser</span></div>
+        <p class="result-text" id="webrtc-block">Waiting...</p>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="card">
+        <div class="card-title">Privacy Summary <span class="badge">Score</span></div>
+        <p class="result-text" id="summary">Waiting...</p>
     </div>
 
     <div class="info-footer">
-        <strong>Why use this?</strong> If you are using a VPN and your WebRTC Local IP displays your real home router gateway IP (e.g., 192.168.x.x) or your true ISP location, your browser is actively leaking your identity!
+        <strong>Design Mode:</strong> All modules are placeholders. No detection logic yet.
     </div>
+
 </div>
 
-<!-- Correct JS path -->
 <script src="script.js"></script>
-
 </body>
 </html>
