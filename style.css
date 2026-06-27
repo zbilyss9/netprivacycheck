@@ -9,21 +9,21 @@ body {
   padding-bottom: 4rem;
 }
 
-/* HEADER WITH LOGO */
+/* HEADER WITH BIG LOGO */
 header {
   position: sticky;
   top: 0;
   background: #0b1020;
-  padding: 1.25rem 1.25rem 1rem;
+  padding: 2rem 1.25rem 1.5rem;
   border-bottom: 1px solid #222842;
   z-index: 999;
   text-align: center;
 }
 .site-logo {
-  height: 80px;
+  height: 160px; /* enlarged for full-page balance */
   width: auto;
   display: inline-block;
-  filter: drop-shadow(0 0 8px #00aaff);
+  filter: drop-shadow(0 0 12px #00aaff);
 }
 
 section {
