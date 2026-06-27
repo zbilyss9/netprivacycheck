@@ -27,110 +27,73 @@
 
 <body>
 
-    <!-- Top Bar -->
+    <!-- Top Navigation -->
     <header class="topbar">
-        <button id="menu-btn" class="topbar-menu-btn">☰</button>
-        <div class="topbar-title">
+        <div class="topbar-left">
+            <button id="menu-btn" class="hamburger">☰</button>
             <span class="brand">netprivacycheck</span>
-            <span class="subtitle">Privacy Tools Dashboard</span>
         </div>
+
+        <nav class="topnav">
+            <a href="#ip">IP</a>
+            <a href="#dns">DNS Leak</a>
+            <a href="#webrtc">WebRTC</a>
+            <a href="#fingerprint">Fingerprint</a>
+        </nav>
     </header>
 
-    <!-- Sidebar -->
-    <aside id="sidebar" class="sidebar">
-        <div class="sidebar-logo">Privacy Tools</div>
-        <nav class="sidebar-nav">
-            <a href="#ip" class="nav-link">IP Exposure</a>
-            <a href="#dns" class="nav-link">DNS Leak</a>
-            <a href="#webrtc" class="nav-link">WebRTC Leak</a>
-            <a href="#fingerprint" class="nav-link">Browser Fingerprint</a>
-        </nav>
-        <div class="sidebar-footer">© 2026 netprivacycheck</div>
-    </aside>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu">
+        <button id="close-menu" class="close-btn">×</button>
+        <a href="#ip">IP</a>
+        <a href="#dns">DNS Leak</a>
+        <a href="#webrtc">WebRTC</a>
+        <a href="#fingerprint">Fingerprint</a>
+    </div>
 
     <!-- Main Content -->
-    <main class="main">
-        <section class="grid">
+    <main class="container">
 
-            <!-- IP Card -->
-            <section id="ip" class="card">
-                <div class="card-header">
-                    <h2>IP Exposure</h2>
-                    <span class="badge badge-warning">Basic</span>
-                </div>
-                <p class="card-description">
-                    Overview of your public IP and related metadata.  
-                    (Static placeholders – functionality can be added later.)
-                </p>
+        <!-- IP Card -->
+        <section id="ip" class="card">
+            <h2>IP Exposure</h2>
+            <p class="desc">Static placeholders — functionality can be added later.</p>
 
-                <div class="card-grid">
-                    <div class="card-item">
-                        <span class="label">IP Address</span>
-                        <span class="value" id="ip-result">Your IP will appear here</span>
-                    </div>
-                    <div class="card-item">
-                        <span class="label">Location</span>
-                        <span class="value" id="location-result">Location will appear here</span>
-                    </div>
-                    <div class="card-item">
-                        <span class="label">ISP</span>
-                        <span class="value" id="isp-result">ISP will appear here</span>
-                    </div>
-                    <div class="card-item">
-                        <span class="label">ASN</span>
-                        <span class="value" id="asn-result">ASN will appear here</span>
-                    </div>
-                    <div class="card-item">
-                        <span class="label">Timezone</span>
-                        <span class="value" id="timezone-result">Timezone will appear here</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- DNS Card -->
-            <section id="dns" class="card">
-                <div class="card-header">
-                    <h2>DNS Leak Test</h2>
-                    <span class="badge badge-info">Coming soon</span>
-                </div>
-                <p class="card-description">
-                    Detect whether your DNS queries are leaking outside your secure tunnel.
-                </p>
-                <div class="placeholder-box">
-                    DNS leak diagnostics will be added here.
-                </div>
-            </section>
-
-            <!-- WebRTC Card -->
-            <section id="webrtc" class="card">
-                <div class="card-header">
-                    <h2>WebRTC Leak Test</h2>
-                    <span class="badge badge-info">Coming soon</span>
-                </div>
-                <p class="card-description">
-                    Check if WebRTC reveals your real IP behind VPN or proxy.
-                </p>
-                <div class="placeholder-box">
-                    WebRTC leak checks will be added here.
-                </div>
-            </section>
-
-            <!-- Fingerprint Card -->
-            <section id="fingerprint" class="card">
-                <div class="card-header">
-                    <h2>Browser Fingerprint</h2>
-                    <span class="badge badge-info">Coming soon</span>
-                </div>
-                <p class="card-description">
-                    Analyze how uniquely identifiable your browser configuration is.
-                </p>
-                <div class="placeholder-box">
-                    Fingerprint metrics will be added here.
-                </div>
-            </section>
-
+            <div class="grid">
+                <div class="item"><span>IP Address</span><strong id="ip-result">Your IP will appear here</strong></div>
+                <div class="item"><span>Location</span><strong id="location-result">Location will appear here</strong></div>
+                <div class="item"><span>ISP</span><strong id="isp-result">ISP will appear here</strong></div>
+                <div class="item"><span>ASN</span><strong id="asn-result">ASN will appear here</strong></div>
+                <div class="item"><span>Timezone</span><strong id="timezone-result">Timezone will appear here</strong></div>
+            </div>
         </section>
+
+        <!-- DNS -->
+        <section id="dns" class="card">
+            <h2>DNS Leak Test</h2>
+            <p class="desc">Detect DNS exposure.</p>
+            <div class="placeholder">DNS leak diagnostics will be added here.</div>
+        </section>
+
+        <!-- WebRTC -->
+        <section id="webrtc" class="card">
+            <h2>WebRTC Leak Test</h2>
+            <p class="desc">Check if WebRTC reveals your real IP.</p>
+            <div class="placeholder">WebRTC leak checks will be added here.</div>
+        </section>
+
+        <!-- Fingerprint -->
+        <section id="fingerprint" class="card">
+            <h2>Browser Fingerprint</h2>
+            <p class="desc">Analyze browser uniqueness.</p>
+            <div class="placeholder">Fingerprint metrics will be added here.</div>
+        </section>
+
     </main>
+
+    <footer class="footer">
+        © 2026 netprivacycheck
+    </footer>
 
     <script src="script.js"></script>
 </body>
