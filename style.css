@@ -1,188 +1,104 @@
-/* ===========================
-   GLOBAL
-=========================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-  margin: 0;
-  font-family: Inter, Arial, sans-serif;
-  background: radial-gradient(circle at center, #0a1a33 0%, #050a14 70%);
-  color: #fff;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0b1020;
+  color: #f5f7ff;
+  line-height: 1.6;
+  font-size: 16px;
+  padding-bottom: 4rem;
 }
 
-/* ===========================
-   TOP BAR (NO FUNCTIONAL LINKS)
-=========================== */
-.topbar {
-  width: 100%;
-  padding: 16px 26px;
-  background: rgba(0,0,0,0.45);
-  backdrop-filter: blur(14px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+header {
   position: sticky;
   top: 0;
-  z-index: 1000;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: #0b1020;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #222842;
+  z-index: 999;
+}
+header h1 { font-size: 1.4rem; margin-bottom: 0.3rem; }
+
+section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.25rem;
 }
 
-.logo {
-  font-size: 22px;
+.ip-box {
+  background: #151a30;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+  border: 1px solid #252b45;
+}
+.ip-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8b90b5;
+}
+.ip-value {
+  font-size: 1.6rem;
   font-weight: 700;
-  color: #4db8ff;
-  letter-spacing: 0.5px;
-  text-shadow: 0 0 10px #008cffaa;
+  margin-top: 0.25rem;
+  word-break: break-all;
 }
 
-/* ===========================
-   HERO + CENTRAL CARD WRAPPER
-=========================== */
-.hero {
-  width: 100%;
-  padding: 60px 20px 40px;
-  text-align: center;
-  background: linear-gradient(135deg, #001a33, #003366, #0055aa);
-  box-shadow: 0 0 80px #008cff55 inset;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.hero h1 {
-  font-size: 42px;
-  margin-bottom: 10px;
-  font-weight: 700;
-}
-
-.hero p {
-  font-size: 18px;
-  opacity: 0.85;
-  margin-bottom: 30px;
-}
-
-.central-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 40px;
-}
-
-/* ===========================
-   BIG CENTRAL OOKLA-STYLE CARD
-=========================== */
-.central-card {
-  position: relative;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, #061427 0%, #020611 70%);
-  box-shadow: 0 0 60px #008cff66;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 2px solid rgba(0,140,255,0.35);
-  animation: ringPulse 4s linear infinite;
-}
-
-.ring.r1 { width: 260px; height: 260px; }
-.ring.r2 { width: 290px; height: 290px; animation-delay: 1s; }
-.ring.r3 { width: 320px; height: 320px; animation-delay: 2s; }
-
-.central-value {
-  font-size: 52px;
-  font-weight: 700;
-  color: #4db8ff;
-}
-
-.central-label {
-  font-size: 16px;
-  opacity: 0.8;
-  margin-top: 6px;
-}
-
-/* ===========================
-   TOOL GRID
-=========================== */
-.tools {
+.grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 26px;
-  padding: 40px 20px 80px;
-  max-width: 1100px;
-  margin: auto;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+@media (min-width: 600px) {
+  .grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 }
 
-@media (min-width: 800px) {
-  .tools {
-    grid-template-columns: 1fr 1fr;
-  }
+.card {
+  background: #151a30;
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid #252b45;
+  transition: transform 0.15s ease;
 }
-
-/* ===========================
-   TOOL CARDS (OOKLA STYLE + PULSE)
-=========================== */
-.tool-card {
-  background: rgba(255,255,255,0.03);
-  padding: 28px;
-  border-radius: 18px;
-  box-shadow: 0 0 25px #008cff22;
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: 0.25s ease;
-  backdrop-filter: blur(8px);
-  position: relative;
-  overflow: hidden;
-  animation: cardPulse 6s ease-in-out infinite;
-}
-
-.tool-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 18px;
-  padding: 2px;
-  background: linear-gradient(135deg, #008cff, #0044ff, #00aaff);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  opacity: 0.12;
-  transition: opacity 0.3s ease;
-}
-
-.tool-card:hover::before { opacity: 0.35; }
-.tool-card:hover {
-  box-shadow: 0 0 40px #008cff55;
-  transform: translateY(-4px);
-}
-
-.tool-card h3 {
-  margin-top: 0;
-  font-size: 22px;
-  color: #4db8ff;
+.card:active { transform: scale(0.98); }
+.card a {
+  color: #6fb6ff;
+  text-decoration: none;
   font-weight: 600;
+  font-size: 1.05rem;
 }
 
-.tool-card p {
-  opacity: 0.75;
-  font-size: 15px;
-  line-height: 1.5;
-}
+h2 { margin-top: 1.75rem; margin-bottom: 0.75rem; font-size: 1.35rem; }
+h3 { margin-bottom: 0.5rem; font-size: 1.15rem; }
 
-/* ===========================
-   ANIMATIONS
-=========================== */
-@keyframes ringPulse {
-  0% { opacity: 0.2; transform: scale(0.95); }
-  50% { opacity: 0.6; transform: scale(1.02); }
-  100% { opacity: 0.2; transform: scale(0.95); }
+.faq-item {
+  background: #151a30;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #252b45;
 }
+.faq-item h3 {
+  font-size: 1.1rem;
+  cursor: pointer;
+  position: relative;
+  padding-right: 1.5rem;
+}
+.faq-item h3::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1.3rem;
+}
+.faq-item.open h3::after { content: "-"; }
+.faq-item p { display: none; margin-top: 0.5rem; }
+.faq-item.open p { display: block; }
 
-@keyframes cardPulse {
-  0% { box-shadow: 0 0 25px #008cff22; }
-  50% { box-shadow: 0 0 40px #008cff55; }
-  100% { box-shadow: 0 0 25px #008cff22; }
+.page-title {
+  font-size: 2rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #222842;
 }
