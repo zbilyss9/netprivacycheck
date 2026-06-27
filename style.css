@@ -1,3 +1,4 @@
+/* GLOBAL RESET */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -9,6 +10,7 @@ body {
   padding-bottom: 4rem;
 }
 
+/* HEADER */
 header {
   position: sticky;
   top: 0;
@@ -16,15 +18,55 @@ header {
   padding: 1rem 1.25rem;
   border-bottom: 1px solid #222842;
   z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-header h1 { font-size: 1.4rem; margin-bottom: 0.3rem; }
+header h1 { font-size: 1.4rem; }
 
+/* MOBILE MENU BUTTON */
+.menu-btn {
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: #f5f7ff;
+  cursor: pointer;
+  display: block;
+}
+
+/* MOBILE MENU PANEL */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #151a30;
+  border: 1px solid #252b45;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 0.5rem;
+}
+.mobile-menu a {
+  color: #6fb6ff;
+  padding: 0.5rem 0;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+.mobile-menu a + a {
+  border-top: 1px solid #252b45;
+}
+
+/* SHOW MENU WHEN ACTIVE */
+.mobile-menu.open {
+  display: flex;
+}
+
+/* SECTIONS */
 section {
   max-width: 960px;
   margin: 0 auto;
   padding: 1.25rem;
 }
 
+/* IP BOX */
 .ip-box {
   background: #151a30;
   border-radius: 12px;
@@ -45,6 +87,7 @@ section {
   word-break: break-all;
 }
 
+/* GRID */
 .grid {
   display: grid;
   gap: 1rem;
@@ -54,6 +97,7 @@ section {
   .grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 }
 
+/* CARDS */
 .card {
   background: #151a30;
   border-radius: 12px;
@@ -69,9 +113,7 @@ section {
   font-size: 1.05rem;
 }
 
-h2 { margin-top: 1.75rem; margin-bottom: 0.75rem; font-size: 1.35rem; }
-h3 { margin-bottom: 0.5rem; font-size: 1.15rem; }
-
+/* FAQ */
 .faq-item {
   background: #151a30;
   border-radius: 10px;
@@ -96,6 +138,7 @@ h3 { margin-bottom: 0.5rem; font-size: 1.15rem; }
 .faq-item p { display: none; margin-top: 0.5rem; }
 .faq-item.open p { display: block; }
 
+/* PAGE TITLES */
 .page-title {
   font-size: 2rem;
   margin-top: 2rem;
