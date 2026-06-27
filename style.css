@@ -1,135 +1,204 @@
-:root {
-    --bg1: #0a0f2b;
-    --bg2: #1a2b6d;
-    --bg3: #4f3dfc;
-
-    --card-bg: rgba(15, 20, 45, 0.85);
-    --card-border: rgba(120, 150, 255, 0.25);
-
-    --text: #e8ecff;
-    --muted: #9aa3c7;
-
-    --radius: 26px;
-    --shadow-glow: 0 0 40px rgba(80, 120, 255, 0.45);
-    --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
+/* ===========================
+   GLOBAL
+=========================== */
 body {
-    margin: 0;
-    font-family: var(--font);
-    color: var(--text);
-
-    background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
-    background-size: 300% 300%;
-    animation: gradientMove 12s ease infinite;
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: radial-gradient(circle at center, #0a1a33 0%, #050a14 70%);
+  color: #fff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* TOP BAR */
+/* ===========================
+   TOP BAR (NO FUNCTIONAL LINKS)
+=========================== */
 .topbar {
-    height: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 32px;
-    background: rgba(10, 14, 35, 0.55);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  padding: 16px 26px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(14px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.brand {
-    font-size: 22px;
-    font-weight: 600;
-    color: #7aa2ff;
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #4db8ff;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px #008cffaa;
 }
 
-.nav a {
-    margin-left: 26px;
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.2s ease;
+/* ===========================
+   HERO + CENTRAL CARD WRAPPER
+=========================== */
+.hero {
+  width: 100%;
+  padding: 60px 20px 40px;
+  text-align: center;
+  background: linear-gradient(135deg, #001a33, #003366, #0055aa);
+  box-shadow: 0 0 80px #008cff55 inset;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.nav a:hover {
-    color: #a8c3ff;
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  font-weight: 700;
 }
 
-/* MAIN */
-.container {
-    max-width: 1100px;
-    margin: 60px auto;
-    padding: 20px;
+.hero p {
+  font-size: 18px;
+  opacity: 0.85;
+  margin-bottom: 30px;
 }
 
-/* GLOWING FULL-WIDTH CARDS */
-.card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 32px;
-    margin-bottom: 50px;
-    box-shadow: var(--shadow-glow);
+.central-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 40px;
 }
 
-.card h2 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 600;
+/* ===========================
+   BIG CENTRAL OOKLA-STYLE CARD
+=========================== */
+.central-card {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #061427 0%, #020611 70%);
+  box-shadow: 0 0 60px #008cff66;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
-.desc {
-    margin-top: 8px;
-    color: var(--muted);
-    font-size: 16px;
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(0,140,255,0.35);
+  animation: ringPulse 4s linear infinite;
 }
 
-/* GRID */
-.grid {
-    margin-top: 26px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
+.ring.r1 { width: 260px; height: 260px; }
+.ring.r2 { width: 290px; height: 290px; animation-delay: 1s; }
+.ring.r3 { width: 320px; height: 320px; animation-delay: 2s; }
+
+.central-value {
+  font-size: 52px;
+  font-weight: 700;
+  color: #4db8ff;
 }
 
-.item {
-    background: rgba(20, 25, 60, 0.6);
-    border: 1px solid rgba(120, 150, 255, 0.2);
-    padding: 18px;
-    border-radius: 18px;
+.central-label {
+  font-size: 16px;
+  opacity: 0.8;
+  margin-top: 6px;
 }
 
-.item span {
-    display: block;
-    font-size: 14px;
-    color: var(--muted);
+/* ===========================
+   TOOL GRID
+=========================== */
+.tools {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 26px;
+  padding: 40px 20px 80px;
+  max-width: 1100px;
+  margin: auto;
 }
 
-.item strong {
-    display: block;
-    margin-top: 6px;
-    font-size: 18px;
+@media (min-width: 800px) {
+  .tools {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-/* PLACEHOLDER */
-.placeholder {
-    margin-top: 26px;
-    border: 1px dashed rgba(255, 255, 255, 0.25);
-    padding: 20px;
-    border-radius: 18px;
-    color: var(--muted);
-    font-size: 16px;
+/* ===========================
+   TOOL CARDS (OOKLA STYLE + PULSE)
+=========================== */
+.tool-card {
+  background: rgba(255,255,255,0.03);
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 0 25px #008cff22;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: 0.25s ease;
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+  animation: cardPulse 6s ease-in-out infinite;
 }
 
-/* FOOTER */
-.footer {
-    text-align: center;
-    padding: 20px;
-    color: var(--muted);
-    font-size: 15px;
+.tool-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 2px;
+  background: linear-gradient(135deg, #008cff, #0044ff, #00aaff);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0.12;
+  transition: opacity 0.3s ease;
 }
+
+.tool-card:hover::before { opacity: 0.35; }
+.tool-card:hover {
+  box-shadow: 0 0 40px #008cff55;
+  transform: translateY(-4px);
+}
+
+.tool-card h3 {
+  margin-top: 0;
+  font-size: 22px;
+  color: #4db8ff;
+  font-weight: 600;
+}
+
+.tool-card p {
+  opacity: 0.75;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ===========================
+   TOOL GRID ITEMS
+=========================== */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.tool-item {
+  background: rgba(255,255,255,0.02);
+  border: 1px dashed rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+@keyframes ringPulse {
+  0% { opacity: 0.2; transform: scale(0.95); }
+  50% { opacity: 0.6; transform: scale(1.02); }
+  100% { opacity: 0.2; transform: scale(0.95); }
+}
+
+@keyframes cardPulse {
+  0% { box-shadow: 0 0 25px #008
