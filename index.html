@@ -1,171 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Tools</title>
 
-<!-- SEO TITLE -->
-<title>Privacy Tools – IP, DNS, WebRTC & Browser Leak Tests</title>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Privacy Tools – IP, DNS Leak, WebRTC, Fingerprint Tests">
+    <meta name="twitter:description" content="Check your IP, DNS leaks, WebRTC leaks, browser fingerprint and privacy exposure instantly.">
+    <meta name="twitter:image" content="https://netprivacycheck.com/assets/preview.png">
+    <meta name="twitter:url" content="https://netprivacycheck.com">
 
-<!-- MOBILE VIEWPORT -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- META DESCRIPTION -->
-<meta name="description" content="Run instant privacy tests: IP check, DNS leak test, WebRTC leak detection, browser fingerprinting, user agent viewer, and port scanning. 100% client-side and secure.">
-
-<!-- KEYWORDS -->
-<meta name="keywords" content="privacy tools, dns leak test, webrtc leak test, ip checker, browser fingerprint, port checker, user agent viewer, vpn leak test">
-
-<!-- CANONICAL URL -->
-<link rel="canonical" href="https://netprivacycheck.com/">
-
-<!-- OPEN GRAPH -->
-<meta property="og:title" content="Privacy Tools – IP, DNS, WebRTC & Browser Leak Tests">
-<meta property="og:description" content="Instant privacy audit: IP, DNS, WebRTC, fingerprint, and port leak tests. 100% client-side.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://netprivacycheck.com/">
-<meta property="og:image" content="https://netprivacycheck.com/preview.png">
-
-<!-- TWITTER CARD -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Privacy Tools – Full Privacy Audit">
-<meta name="twitter:description" content="Run IP, DNS, WebRTC, fingerprint and port leak tests instantly.">
-<meta name="twitter:image" content="https://netprivacycheck.com/preview.png">
-
-<!-- FAVICON -->
-<link rel="icon" href="/favicon.ico">
-
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-  <h1>Privacy Tools</h1>
+    <!-- Navigation -->
+    <nav>
+        <button id="menu-btn" class="hamburger">☰</button>
+        <h1 class="site-title">Privacy Tools</h1>
+    </nav>
 
-  <!-- MOBILE MENU BUTTON -->
-  <button class="menu-btn" id="menu-btn">☰</button>
+    <!-- Slide-in Menu -->
+    <div id="menu-panel">
+        <button id="close-menu" class="close-btn">×</button>
 
-  <!-- MOBILE MENU PANEL -->
-  <nav class="mobile-menu" id="mobile-menu">
-    <a href="#homepage">Home</a>
-    <a href="#dns">DNS Leak Test</a>
-    <a href="#webrtc">WebRTC Leak Test</a>
-    <a href="#fingerprint">Fingerprint</a>
-    <a href="#ua">User Agent</a>
-    <a href="#port">Port Checker</a>
-    <a href="#faq">FAQ</a>
-  </nav>
-</header>
-
-<section id="homepage">
-  <h2 class="page-title">Homepage</h2>
-
-  <h2>Your Public IP Address</h2>
-  <div class="ip-box">
-    <div class="ip-label">IP Address</div>
-    <div class="ip-value" id="ip-value">Detecting…</div>
-
-    <div class="grid" style="margin-top:1rem;">
-      <div>
-        <div class="ip-label">Location</div>
-        <div class="ip-value" id="ip-location">Unknown</div>
-      </div>
-      <div>
-        <div class="ip-label">ISP</div>
-        <div class="ip-value" id="ip-isp">Unknown</div>
-      </div>
+        <ul class="menu-links">
+            <li><a href="#ip">IP</a></li>
+            <li><a href="#dns">DNS Leak</a></li>
+            <li><a href="#webrtc">WebRTC</a></li>
+            <li><a href="#fingerprint">Fingerprint</a></li>
+        </ul>
     </div>
-  </div>
 
-  <h2>Run a Full Privacy Check</h2>
-  <div class="grid">
-    <div class="card"><h3>DNS Leak Test</h3><a href="#dns">Go →</a></div>
-    <div class="card"><h3>WebRTC Leak Test</h3><a href="#webrtc">Go →</a></div>
-    <div class="card"><h3>Browser Fingerprint</h3><a href="#fingerprint">Go →</a></div>
-    <div class="card"><h3>User Agent</h3><a href="#ua">Go →</a></div>
-    <div class="card"><h3>Port Checker</h3><a href="#port">Go →</a></div>
-  </div>
-</section>
+    <!-- MAIN CONTENT -->
+    <section id="ip" class="tool-box">
+        <h2>Your Public IP</h2>
+        <p id="ip-result">Loading...</p>
 
-<section id="dns">
-  <h2 class="page-title">DNS Leak Test</h2>
-  <p>This is where the DNS leak test UI will go.</p>
-</section>
+        <h3>Location</h3>
+        <p id="location-result">Loading...</p>
 
-<section id="webrtc">
-  <h2 class="page-title">WebRTC Leak Test</h2>
-  <p>This is where WebRTC leak detection will appear.</p>
-</section>
+        <h3>ISP</h3>
+        <p id="isp-result">Loading...</p>
 
-<section id="fingerprint">
-  <h2 class="page-title">Browser Fingerprint Test</h2>
-  <p>This is where fingerprinting results will appear.</p>
-</section>
+        <h3>ASN</h3>
+        <p id="asn-result">Loading...</p>
 
-<section id="ua">
-  <h2 class="page-title">User Agent Viewer</h2>
-  <p>Your user agent will appear here.</p>
-</section>
+        <h3>Timezone</h3>
+        <p id="timezone-result">Loading...</p>
+    </section>
 
-<section id="port">
-  <h2 class="page-title">Port Checker</h2>
-  <p>Port scanning UI will appear here.</p>
-</section>
-
-<section id="faq">
-  <h2 class="page-title">FAQ</h2>
-
-  <div class="faq-item">
-    <h3>What is my IP?</h3>
-    <p>Your IP address is your public identifier on the internet and can reveal your location and ISP.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>What is a DNS leak?</h3>
-    <p>A DNS leak exposes your DNS requests even when using a VPN, revealing your real location or ISP.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>What is a WebRTC leak?</h3>
-    <p>WebRTC can reveal your real IP address through browser technology, even when using a VPN.</p>
-  </div>
-</section>
-
-<script src="script.js"></script>
-
-<!-- FAQ SCHEMA -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is my IP?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Your IP address is your public identifier on the internet and can reveal your location and ISP."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is a DNS leak?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A DNS leak exposes your DNS requests even when using a VPN, revealing your real location or ISP."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is a WebRTC leak?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A WebRTC leak can reveal your real IP address through browser technology, even when using a VPN."
-      }
-    }
-  ]
-}
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
