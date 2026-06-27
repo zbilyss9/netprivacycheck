@@ -3,58 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetPrivacyCheck — Privacy Diagnostic Tools</title>
+    <title>Instant Privacy Audit | IP, DNS & WebRTC Leak Test</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="header">
-    <div class="logo">NetPrivacyCheck</div>
-    <p class="subtitle">Your all‑in‑one privacy diagnostic toolkit</p>
-</header>
+<div class="container">
+    <h1>Privacy Shield Audit</h1>
+    <p class="subtitle">🔒 Zero Logs. 100% Client-Side Detection.</p>
 
-<main>
+    <!-- 1. WHAT IS MY IP CARD -->
+    <div class="card">
+        <div class="card-title">Public IP Address <span class="badge">HTTP Request</span></div>
+        <p class="result-text" id="public-ip">Detecting...</p>
+    </div>
 
-<section class="tool-grid">
+    <!-- 2. WEBRTC LEAK TEST CARD -->
+    <div class="card">
+        <div class="card-title">WebRTC Local Interface IP <span class="badge">Browser API</span></div>
+        <p class="result-text" id="webrtc-ip">Scanning Browser...</p>
+    </div>
 
-    <a class="tool-card" href="#">
-        <img src="assets/icons/ip.svg" class="tool-icon">
-        <h2>IP Check</h2>
-        <p>See your public IP, ISP, and location.</p>
-    </a>
+    <!-- 3. DNS LEAK CARD -->
+    <div class="card">
+        <div class="card-title">DNS Server Country Resolve <span class="badge">Geolocated</span></div>
+        <p class="result-text" id="dns-country">Analyzing Location...</p>
+    </div>
 
-    <a class="tool-card" href="#">
-        <img src="assets/icons/dns.svg" class="tool-icon">
-        <h2>DNS Leak Test</h2>
-        <p>Check if your DNS is leaking through your VPN.</p>
-    </a>
-
-    <a class="tool-card" href="#">
-        <img src="assets/icons/webrtc.svg" class="tool-icon">
-        <h2>WebRTC Leak Test</h2>
-        <p>Detect if WebRTC exposes your real IP.</p>
-    </a>
-
-    <a class="tool-card" href="#">
-        <img src="assets/icons/fingerprint.svg" class="tool-icon">
-        <h2>Fingerprint Test</h2>
-        <p>Analyze your browser fingerprint.</p>
-    </a>
-
-    <a class="tool-card" href="#">
-        <img src="assets/icons/ports.svg" class="tool-icon">
-        <h2>Port Scanner</h2>
-        <p>Check if common ports are open.</p>
-    </a>
-
-</section>
-
-</main>
-
-<footer>
-    <p>© 2026 NetPrivacyCheck — Privacy Tools</p>
-</footer>
+    <div class="info-footer">
+        <strong>Why use this?</strong> If you are using a VPN and your WebRTC Local IP displays your real home router gateway IP (e.g., 192.168.x.x) or your true ISP location, your browser is actively leaking your identity!
+    </div>
+</div>
 
 <script src="script.js"></script>
 </body>
