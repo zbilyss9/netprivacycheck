@@ -56,9 +56,9 @@ async function executeNetworkDiagnostics() {
     const metaEl = document.getElementById("connection-meta");
 
     try {
-        // FIXED: Now accurately targeting your /functions/api/audit.js file route!
+        // TARGETING FILE PATH LOCATED INSIDE /functions/api/audit.js
         const response = await fetch("/api/audit");
-        if (!response.ok) throw new Error("Server Error");
+        if (!response.ok) throw new Error("Server Route Error");
         const data = await response.json();
 
         ipEl.classList.remove("skeleton");
