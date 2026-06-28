@@ -58,27 +58,27 @@ async function executeNetworkDiagnostics() {
     const metaEl = document.getElementById("connection-meta");
 
     try {
-        const response = await fetch("https://ipapi.co");
-        if (!response.ok) throw new Error("API Limit reached");
+        // Fetch parameters natively from your own secure backend route
+        const response = await fetch("/api/audit");
+        if (!response.ok) throw new Error("Internal Server Error");
         const data = await response.json();
 
         ipEl.classList.remove("skeleton");
-        ipEl.innerText = data.ip || "Unknown Address";
+        ipEl.innerText = data.ip;
 
         dnsEl.classList.remove("skeleton");
-        dnsEl.innerText = `${data.city || 'Unknown'}, ${data.country_code || 'UN'}`;
+        dnsEl.innerText = data.location;
 
         metaEl.classList.remove("skeleton");
-        metaEl.innerText = data.org || "Unknown Provider";
+        metaEl.innerText = data.provider;
 
         vpnEl.classList.remove("skeleton");
-        const organization = (data.org || "").toLowerCase();
-        if (organization.includes("vpn") || organization.includes("hosting") || organization.includes("servers")) {
-            vpnEl.innerText = "⚠️ VPN Connection Active";
+        vpnEl.innerText = data.vpnStatus;
+        
+        if (data.vpnStatus.includes("⚠️")) {
             vpnEl.style.color = "var(--accent-blue)";
             privacyScores.vpn = true;
         } else {
-            vpnEl.innerText = "❌ Leak (Residential IP)";
             vpnEl.style.color = "var(--error-red)";
             privacyScores.vpn = false;
         }
@@ -86,7 +86,7 @@ async function executeNetworkDiagnostics() {
     } catch (error) {
         [ipEl, dnsEl, vpnEl, metaEl].forEach(el => {
             el.classList.remove("skeleton");
-            el.innerText = "Blocked / Timeout";
+            el.innerText = "Fetch Error (API Limit)";
             el.style.color = "var(--error-red)";
         });
     }
@@ -120,7 +120,7 @@ async function executeWebRTCLeakCheck() {
             
             if (match) {
                 webrtcIpEl.classList.remove("skeleton");
-                webrtcIpEl.innerText = match[0];
+                webrtcIpEl.innerText = match;
                 webrtcBlockEl.classList.remove("skeleton");
                 webrtcBlockEl.innerText = "⚠️ Exposed / Leaking";
                 webrtcBlockEl.style.color = "var(--error-red)";
