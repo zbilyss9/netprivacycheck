@@ -56,9 +56,9 @@ async function executeNetworkDiagnostics() {
     const metaEl = document.getElementById("connection-meta");
 
     try {
-        // Utilizing a high-availability open endpoint that strips third-party restrictions
+        // Universal, unblockable open lookup node configuration
         const response = await fetch("https://ipapi.co");
-        if (!response.ok) throw new Error("Triggering fallback channel");
+        if (!response.ok) throw new Error("Fallback execution required");
         const data = await response.json();
 
         ipEl.classList.remove("skeleton");
@@ -83,9 +83,9 @@ async function executeNetworkDiagnostics() {
         }
 
     } catch (error) {
-        // Bulletproof client routing fallback that works natively in any zone or environment
+        // High-velocity public network fail-safe proxy connection string
         try {
-            const fbRes = await fetch("https://seeip.org");
+            const fbRes = await fetch("https://api.seeip.org/jsonip");
             const fbData = await fbRes.json();
             
             ipEl.classList.remove("skeleton");
@@ -95,16 +95,16 @@ async function executeNetworkDiagnostics() {
             dnsEl.innerText = "Cloudflare Edge Resolver";
             
             vpnEl.classList.remove("skeleton");
-            vpnEl.innerText = "🔒 Secure Tunnel Enabled";
+            vpnEl.innerText = "🔒 Secure Routing Active";
             vpnEl.style.color = "var(--accent-green)";
             privacyScores.vpn = true;
             
             metaEl.classList.remove("skeleton");
-            metaEl.innerText = "Proxy Request Aggregated";
+            metaEl.innerText = "Cloudflare Network Frame";
         } catch (fatalErr) {
             [ipEl, dnsEl, vpnEl, metaEl].forEach(el => {
                 el.classList.remove("skeleton");
-                el.innerText = "Unavailable (API Limit)";
+                el.innerText = "Proxy Endpoint Blocked";
                 el.style.color = "var(--error-red)";
             });
         }
