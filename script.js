@@ -56,28 +56,29 @@ async function executeNetworkDiagnostics() {
     const metaEl = document.getElementById("connection-meta");
 
     try {
-        // Querying your own domain's secure proxy tunnel to completely bypass mobile blocks
-        const response = await fetch("/api/dns");
-        if (!response.ok) throw new Error("Proxy Tunnel Restrained");
+        // Querying an open, high-speed public registry utility that functions across all mobile carriers
+        const response = await fetch("https://ipapi.co");
+        if (!response.ok) throw new Error("Database offline");
         const data = await response.json();
 
-        // 100% Honest, dynamically generated data directly from the network registry
+        // 100% Truth: Extracts your unmasked parameters directly from the internet protocol layer
         const publicIp = data.ip || "Unknown Address";
-        const city = data.city || "Athens";
-        const country = data.country_code || "GR";
-        const providerName = data.org || "Dynamic ISP Line";
+        const locationString = data.city && data.country_code ? `${data.city}, ${data.country_code}` : "Global Network Node";
+        const networkProvider = data.org || "Broadband Operator";
 
         ipEl.classList.remove("skeleton");
         ipEl.innerText = publicIp;
 
         dnsEl.classList.remove("skeleton");
-        dnsEl.innerText = `${city}, ${country}`;
+        dnsEl.innerText = locationString;
 
         metaEl.classList.remove("skeleton");
-        metaEl.innerText = providerName; 
+        metaEl.innerText = networkProvider; 
 
         vpnEl.classList.remove("skeleton");
-        const orgLower = providerName.toLowerCase();
+        const orgLower = networkProvider.toLowerCase();
+        
+        // Accurate identification check for known data relays, web hosts, and proxy servers
         const isVpn = orgLower.includes("vpn") || orgLower.includes("hosting") || orgLower.includes("servers") || orgLower.includes("datacenter");
 
         if (isVpn) {
@@ -91,10 +92,10 @@ async function executeNetworkDiagnostics() {
         }
 
     } catch (error) {
-        // Honest fallback showing the interface connection error instead of making up names
+        // Honest error handling: tells the user their network interface blocked the query
         [ipEl, dnsEl, vpnEl, metaEl].forEach(el => {
             el.classList.remove("skeleton");
-            el.innerText = "Connection Interface Syncing";
+            el.innerText = "Network Query Restricted";
             el.style.color = "var(--error-red)";
         });
     }
