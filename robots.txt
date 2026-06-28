@@ -1,1 +1,4 @@
+User-agent: *
+Allow: /
 
+Sitemap: https://netprivacycheck.com/sitemap.xml
