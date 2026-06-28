@@ -15,6 +15,9 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+
+    /* ⭐ FIX: Prevent compact header from hiding tools */
+    padding-top: 50px;
 }
 
 /* TOP BAR */
@@ -25,7 +28,7 @@ body {
     border-bottom: 1px solid var(--border);
 }
 
-/* ⭐ ADDED: COMPACT HEADER ⭐ */
+/* ⭐ COMPACT HEADER ⭐ */
 .compact-header {
     position: fixed;
     top: 0;
@@ -44,7 +47,6 @@ body {
 .compact-header.visible {
     transform: translateY(0);
 }
-/* ⭐ END OF ADDED CODE ⭐ */
 
 .topbar-title {
     font-size: 1.3rem;
@@ -54,7 +56,10 @@ body {
 /* CONTAINER */
 .container {
     max-width: 900px;
-    margin: 60px auto 30px; /* ⭐ FIX: added top margin so tools are not hidden */
+
+    /* ⭐ FIX: Extra spacing so tools never touch header */
+    margin: 60px auto 30px;
+
     padding: 0 20px;
 }
 
