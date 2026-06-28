@@ -17,12 +17,16 @@ body {
     overflow-x: hidden;
 }
 
-/* TOP BAR */
+/* TOP BAR — FIXED (FIX APPLIED) */
 .topbar {
     width: 100%;
     background-color: #0d1325;
     padding: 16px 20px;
     border-bottom: 1px solid var(--border);
+    position: fixed;   /* FIX */
+    top: 0;            /* FIX */
+    left: 0;           /* FIX */
+    z-index: 10000;    /* FIX */
 }
 
 .topbar-title {
@@ -30,11 +34,11 @@ body {
     font-weight: 600;
 }
 
-/* CONTAINER */
+/* CONTAINER — TOP PADDING ADDED (FIX APPLIED) */
 .container {
     max-width: 900px;
     margin: 30px auto;
-    padding: 0 20px;
+    padding: 80px 20px 0 20px; /* FIX: prevents content from going under fixed topbar */
 }
 
 /* SECTION TITLES */
@@ -119,7 +123,7 @@ body {
 /* ⭐ SAFE COMPACT HEADER — NEVER HIDES TOOLS ⭐ */
 .compact-header {
     position: fixed;
-    top: 56px; /* BELOW your topbar */
+    top: 56px; /* BELOW fixed topbar */
     left: 0;
     width: 100%;
     background-color: #0d1325;
