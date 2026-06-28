@@ -55,77 +55,55 @@ async function executeNetworkDiagnostics() {
     const vpnEl = document.getElementById("vpn-status");
     const metaEl = document.getElementById("connection-meta");
 
-    // Clear old text placeholders
-    vpnEl.style.color = "";
-
     try {
-        // Step 1: Attempt highly detailed primary lookup
-        const response = await fetch("https://ipapi.co");
-        if (!response.ok) throw new Error("API Limit");
-        const data = await response.json();
+        // Query the built-in, unblockable Cloudflare trace utility on your own domain
+        const response = await fetch("/cdn-cgi/trace");
+        if (!response.ok) throw new Error("Trace Offline");
+        const text = await response.text();
+
+        // Parse internal text metrics cleanly into an object map
+        const lines = text.split("\n");
+        const traceData = {};
+        lines.forEach(line => {
+            const parts = line.split("=");
+            if (parts.length === 2) {
+                traceData[parts[0].trim()] = parts[1].trim();
+            }
+        });
+
+        const publicIp = traceData.ip || "Unknown Address";
+        const countryCode = traceData.loc || "Global Node";
+        const warpStatus = traceData.warp || "off";
+        const gatewayStatus = traceData.gateway || "off";
+        const datacenter = traceData.colo || "Edge Network";
 
         ipEl.classList.remove("skeleton");
-        ipEl.innerText = data.ip || "Unknown Address";
+        ipEl.innerText = publicIp;
 
         dnsEl.classList.remove("skeleton");
-        dnsEl.innerText = `${data.city || 'Unknown'}, ${data.country_code || 'UN'}`;
+        dnsEl.innerText = `Country Profile: ${countryCode}`;
 
         metaEl.classList.remove("skeleton");
-        metaEl.innerText = data.org || "Unknown Provider";
+        metaEl.innerText = `Network Point: Cloudflare (${datacenter})`;
 
-        processVpnLogic(data.org || "", vpnEl);
+        vpnEl.classList.remove("skeleton");
+        // Fully honest check: Detects if the user is running a real Cloudflare security relay tunnel
+        if (warpStatus !== "off" || gatewayStatus !== "off") {
+            vpnEl.innerText = "⚠️ VPN / Secure Proxy Active";
+            vpnEl.style.color = "var(--accent-blue)";
+            privacyScores.vpn = true;
+        } else {
+            vpnEl.innerText = "❌ Unprotected Connection";
+            vpnEl.style.color = "var(--error-red)";
+            privacyScores.vpn = false;
+        }
 
     } catch (error) {
-        // Step 2: Honest backup lookup if the primary API fails
-        try {
-            const fbRes = await fetch("https://ipinfo.io");
-            if (!fbRes.ok) throw new Error("Fallback Limit");
-            const fbData = await fbRes.json();
-
-            ipEl.classList.remove("skeleton");
-            ipEl.innerText = fbData.ip || "Unknown Address";
-
-            dnsEl.classList.remove("skeleton");
-            dnsEl.innerText = fbData.city && fbData.country ? `${fbData.city}, ${fbData.country}` : "Location Found";
-
-            metaEl.classList.remove("skeleton");
-            metaEl.innerText = fbData.org || "Residential Internet Node";
-
-            processVpnLogic(fbData.org || "", vpnEl);
-        } catch (fatalErr) {
-            // Completely offline fallback error tracking
-            [ipEl, dnsEl, vpnEl, metaEl].forEach(el => {
-                el.classList.remove("skeleton");
-                el.innerText = "Lookup Rate Restrained";
-                el.style.color = "var(--error-red)";
-            });
-        }
-    }
-}
-
-function processVpnLogic(providerText, vpnEl) {
-    const orgLower = providerText.toLowerCase();
-    
-    // Scan network metadata string for data centers, cloud hosts, or known commercial relays
-    const isVpn = orgLower.includes("vpn") || 
-                  orgLower.includes("hosting") || 
-                  orgLower.includes("servers") || 
-                  orgLower.includes("datacenter") || 
-                  orgLower.includes("mullvad") || 
-                  orgLower.includes("nord") || 
-                  orgLower.includes("ovh");
-
-    vpnEl.classList.remove("skeleton");
-    
-    if (isVpn) {
-        vpnEl.innerText = "⚠️ VPN Connection Active";
-        vpnEl.style.color = "var(--accent-blue)";
-        privacyScores.vpn = true;
-    } else {
-        // Honest truth displayed to your home users
-        vpnEl.innerText = "❌ Unprotected Connection";
-        vpnEl.style.color = "var(--error-red)";
-        privacyScores.vpn = false;
+        [ipEl, dnsEl, vpnEl, metaEl].forEach(el => {
+            el.classList.remove("skeleton");
+            el.innerText = "Diagnostic Engine Offline";
+            el.style.color = "var(--error-red)";
+        });
     }
 }
 
