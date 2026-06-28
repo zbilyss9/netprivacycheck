@@ -100,7 +100,11 @@
     <h1 class="topbar-title">Privacy Shield Audit</h1>
 </header>
 
-<!-- Main tag helps Google find your layout core -->
+<!-- AD placeholder inside layout for Google AdSense header banner -->
+<div class="ad-placeholder top-ad">
+    <span>Advertisement Placeholder (Header)</span>
+</div>
+
 <main class="container">
 
     <!-- NETWORK SECTION -->
@@ -109,22 +113,27 @@
         <div class="grid">
             <div class="card">
                 <div class="card-title">Public IP <span class="badge">Network</span></div>
-                <p class="result-text" id="public-ip">Waiting...</p>
+                <p class="result-text skeleton" id="public-ip">Waiting...</p>
             </div>
             <div class="card">
                 <div class="card-title">DNS Resolver <span class="badge">DNS</span></div>
-                <p class="result-text" id="dns-country">Waiting...</p>
+                <p class="result-text skeleton" id="dns-country">Waiting...</p>
             </div>
             <div class="card">
                 <div class="card-title">VPN Status <span class="badge">ASN</span></div>
-                <p class="result-text" id="vpn-status">Waiting...</p>
+                <p class="result-text skeleton" id="vpn-status">Waiting...</p>
             </div>
             <div class="card">
                 <div class="card-title">Connection Info <span class="badge">Network</span></div>
-                <p class="result-text" id="connection-meta">Waiting...</p>
+                <p class="result-text skeleton" id="connection-meta">Waiting...</p>
             </div>
         </div>
     </section>
+
+    <!-- AD placeholder inside layout split for high mobile click-through rate -->
+    <div class="ad-placeholder mid-ad">
+        <span>Advertisement Placeholder (Content Split)</span>
+    </div>
 
     <!-- BROWSER SECTION -->
     <section>
@@ -132,19 +141,19 @@
         <div class="grid">
             <div class="card">
                 <div class="card-title">WebRTC IP <span class="badge">Browser</span></div>
-                <p class="result-text" id="webrtc-ip">Waiting...</p>
+                <p class="result-text skeleton" id="webrtc-ip">Waiting...</p>
             </div>
             <div class="card">
                 <div class="card-title">WebRTC Protection <span class="badge">Browser</span></div>
-                <p class="result-text" id="webrtc-block">Waiting...</p>
+                <p class="result-text skeleton" id="webrtc-block">Waiting...</p>
             </div>
             <div class="card">
                 <div class="card-title">Fingerprint <span class="badge">Entropy</span></div>
-                <p class="result-text" id="fingerprint">Waiting...</p>
+                <p class="result-text skeleton" id="fingerprint">Waiting...</p>
             </div>
             <div class="card">
                 <div class="card-title">Device Info <span class="badge">Client</span></div>
-                <p class="result-text" id="device-meta">Waiting...</p>
+                <p class="result-text skeleton" id="device-meta">Waiting...</p>
             </div>
         </div>
     </section>
@@ -155,23 +164,40 @@
         <div class="grid">
             <div class="card">
                 <div class="card-title">Security Headers <span class="badge">Browser</span></div>
-                <p class="result-text" id="security-headers">Waiting...</p>
+                <p class="result-text skeleton" id="security-headers">Waiting...</p>
             </div>
             <div class="card">
                 <div class="card-title">DNS-over-HTTPS <span class="badge">Encrypted</span></div>
-                <p class="result-text" id="doh-status">Waiting...</p>
+                <p class="result-text skeleton" id="doh-status">Waiting...</p>
             </div>
             <div class="card">
                 <div class="card-title">Privacy Score <span class="badge">Summary</span></div>
-                <p class="result-text" id="summary">Waiting...</p>
+                <p class="result-text skeleton" id="summary">Waiting...</p>
             </div>
+        </div>
+    </section>
+
+    <!-- CONTENT DEPTH ACCORDION FOR ADSENSE VALUE CHECK -->
+    <section class="info-accordion-section">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="accordion-item">
+            <details>
+                <summary>What is a WebRTC data leak?</summary>
+                <p>WebRTC allows browsers to create direct peer-to-peer connections for streaming. However, this protocol can occasionally expose your actual residential public and local IP addresses, completely bypassing an active proxy server or standard VPN tunnel configuration.</p>
+            </details>
+        </div>
+        <div class="accordion-item">
+            <details>
+                <summary>How does browser fingerprint tracking function?</summary>
+                <p>Websites utilize sophisticated Canvas and hardware query methods to compile unique identity sets from your specific computer configuration. This identity calculation bypasses browser cookie deletions to track your online sessions persistently.</p>
+            </details>
         </div>
     </section>
 
 </main>
 
 <footer class="footer">
-    <small>© 2026 Privacy Shield Audit — Design Mode Only</small>
+    <small>© 2026 Privacy Shield Audit — Secure Client Testing Module</small>
 </footer>
 
 <script src="script.js"></script>
