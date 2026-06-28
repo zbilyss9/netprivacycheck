@@ -15,9 +15,6 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-
-    /* ⭐ FIX: Prevent compact header from hiding tools */
-    padding-top: 50px;
 }
 
 /* TOP BAR */
@@ -28,26 +25,6 @@ body {
     border-bottom: 1px solid var(--border);
 }
 
-/* ⭐ COMPACT HEADER ⭐ */
-.compact-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #0d1325;
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--border);
-    font-size: 1rem;
-    font-weight: 600;
-    transform: translateY(-100%);
-    transition: transform 0.25s ease;
-    z-index: 9999;
-}
-
-.compact-header.visible {
-    transform: translateY(0);
-}
-
 .topbar-title {
     font-size: 1.3rem;
     font-weight: 600;
@@ -56,10 +33,7 @@ body {
 /* CONTAINER */
 .container {
     max-width: 900px;
-
-    /* ⭐ FIX: Extra spacing so tools never touch header */
-    margin: 60px auto 30px;
-
+    margin: 30px auto;
     padding: 0 20px;
 }
 
