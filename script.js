@@ -56,58 +56,37 @@ async function executeNetworkDiagnostics() {
     const metaEl = document.getElementById("connection-meta");
 
     try {
-        // Universal, unblockable open lookup node configuration
-        const response = await fetch("https://ipapi.co");
-        if (!response.ok) throw new Error("Fallback execution");
+        // FIXED: Now accurately targeting your /functions/api/audit.js file route!
+        const response = await fetch("/api/audit");
+        if (!response.ok) throw new Error("Server Error");
         const data = await response.json();
 
         ipEl.classList.remove("skeleton");
-        ipEl.innerText = data.ip || "Unknown Address";
+        ipEl.innerText = data.ip;
 
         dnsEl.classList.remove("skeleton");
-        dnsEl.innerText = `${data.city || 'Unknown'}, ${data.country_code || 'UN'}`;
+        dnsEl.innerText = data.location;
 
         metaEl.classList.remove("skeleton");
-        metaEl.innerText = data.org || "Unknown ISP";
+        metaEl.innerText = data.provider;
 
         vpnEl.classList.remove("skeleton");
-        const orgLower = (data.org || "").toLowerCase();
-        if (orgLower.includes("vpn") || orgLower.includes("hosting") || orgLower.includes("servers") || orgLower.includes("datacenter")) {
-            vpnEl.innerText = "⚠️ VPN Connection Active";
+        vpnEl.innerText = data.vpnStatus;
+        
+        if (data.vpnStatus.includes("⚠️")) {
             vpnEl.style.color = "var(--accent-blue)";
             privacyScores.vpn = true;
         } else {
-            vpnEl.innerText = "❌ Leak (Residential IP)";
             vpnEl.style.color = "var(--error-red)";
             privacyScores.vpn = false;
         }
 
     } catch (error) {
-        // High-velocity public network fail-safe proxy connection string
-        try {
-            const fbRes = await fetch("https://seeip.org");
-            const fbData = await fbRes.json();
-            
-            ipEl.classList.remove("skeleton");
-            ipEl.innerText = fbData.ip || "IP Verified";
-            
-            dnsEl.classList.remove("skeleton");
-            dnsEl.innerText = "Cloudflare Edge Resolver";
-            
-            vpnEl.classList.remove("skeleton");
-            vpnEl.innerText = "🔒 Secure Routing Active";
-            vpnEl.style.color = "var(--accent-green)";
-            privacyScores.vpn = true;
-            
-            metaEl.classList.remove("skeleton");
-            metaEl.innerText = "Cloudflare Network Frame";
-        } catch (fatalErr) {
-            [ipEl, dnsEl, vpnEl, metaEl].forEach(el => {
-                el.classList.remove("skeleton");
-                el.innerText = "Proxy Endpoint Blocked";
-                el.style.color = "var(--error-red)";
-            });
-        }
+        [ipEl, dnsEl, vpnEl, metaEl].forEach(el => {
+            el.classList.remove("skeleton");
+            el.innerText = "Connection Restrained";
+            el.style.color = "var(--error-red)";
+        });
     }
 }
 
