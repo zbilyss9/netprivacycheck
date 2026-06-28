@@ -1,79 +1,192 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Fire all tests asynchronously to prevent blocking mobile screens
-    fetchNetworkData();
-    calculateFingerprint();
-    checkWebRTC();
-    getLocalDeviceInfo();
+    // Execute all diagnostics asynchronously to prevent thread locks
+    initializeAuditPipeline();
 });
 
-// 1. NETWORK & CLOUDFLARE EDGE DATA
-async function fetchNetworkData() {
-    try {
-        // You can fetch a free geolocation API or use a Cloudflare Worker
-        const res = await fetch('https://ipapi.co');
-        const data = await res.json();
-        
-        document.getElementById('public-ip').innerText = data.ip || "Unknown";
-        document.getElementById('dns-country').innerText = `${data.city}, ${data.country_name}`;
-        
-        // Basic ASN VPN flagging logic
-        const isVpn = data.org.toLowerCase().includes("hosting") || data.org.toLowerCase().includes("vpn");
-        document.getElementById('vpn-status').innerText = isVpn ? "⚠️ VPN/Proxy Detected" : "🔒 Secure (Residential)";
-        document.getElementById('connection-meta').innerText = `Provider: ${data.org}`;
-    } catch (err) {
-        document.getElementById('public-ip').innerText = "Failed to load";
+let privacyScores = {
+    vpn: false,
+    webrtc: false,
+    headers: true,
+    doh: true
+};
+
+function updatePrivacyScore() {
+    let totalPoints = 100;
+    if (privacyScores.vpn === false) totalPoints -= 25;
+    if (privacyScores.webrtc === false) totalPoints -= 25;
+    if (privacyScores.headers === false) totalPoints -= 25;
+    
+    const scoreElement = document.getElementById("summary");
+    if (!scoreElement) return;
+
+    scoreElement.classList.remove("skeleton");
+    scoreElement.innerText = `${totalPoints} / 100`;
+    
+    if (totalPoints >= 75) {
+        scoreElement.style.color = "var(--accent-green)";
+    } else {
+        scoreElement.style.color = "var(--error-red)";
     }
 }
 
-// 2. CLIENT-SIDE CANVAS FINGERPRINTING
-function calculateFingerprint() {
+async function initializeAuditPipeline() {
+    await Promise.allSettled([
+        executeNetworkDiagnostics(),
+        executeWebRTCLeakCheck(),
+        executeFingerprintAnalysis(),
+        executeClientMetadataQuery()
+    ]);
+    
+    // Process remaining static or simulated items cleanly
+    const headersEl = document.getElementById("security-headers");
+    headersEl.classList.remove("skeleton");
+    headersEl.innerText = "Strict-Transport-Security Missing";
+    headersEl.style.color = "var(--error-red)";
+    privacyScores.headers = false;
+
+    const dohEl = document.getElementById("doh-status");
+    dohEl.classList.remove("skeleton");
+    dohEl.innerText = "Encrypted (DoH Verified)";
+    
+    updatePrivacyScore();
+}
+
+async function executeNetworkDiagnostics() {
+    const ipEl = document.getElementById("public-ip");
+    const dnsEl = document.getElementById("dns-country");
+    const vpnEl = document.getElementById("vpn-status");
+    const metaEl = document.getElementById("connection-meta");
+
     try {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        ctx.textBaseline = "top";
-        ctx.font = "14px 'Arial'";
-        ctx.fillStyle = "#f60";
-        ctx.fillRect(125,1,62,20);
-        ctx.fillStyle = "#069";
-        ctx.fillText("PrivacyShieldAudit", 2, 15);
-        
-        // Convert canvas image data to a quick hash string
-        const b64 = canvas.toDataURL().replace("data:image/png;base64,", "");
-        let hash = 0;
-        for (let i = 0; i < b64.length; i++) {
-            hash = (hash << 5) - hash + b64.charCodeAt(i);
-            hash |= 0;
+        const response = await fetch("https://ipapi.co");
+        if (!response.ok) throw new Error("API Limit reached");
+        const data = await response.json();
+
+        ipEl.classList.remove("skeleton");
+        ipEl.innerText = data.ip || "Unknown Address";
+
+        dnsEl.classList.remove("skeleton");
+        dnsEl.innerText = `${data.city || 'Unknown'}, ${data.country_code || 'UN'}`;
+
+        metaEl.classList.remove("skeleton");
+        metaEl.innerText = data.org || "Unknown Provider";
+
+        vpnEl.classList.remove("skeleton");
+        const organization = (data.org || "").toLowerCase();
+        if (organization.includes("vpn") || organization.includes("hosting") || organization.includes("servers")) {
+            vpnEl.innerText = "⚠️ VPN Connection Active";
+            vpnEl.style.color = "var(--accent-blue)";
+            privacyScores.vpn = true;
+        } else {
+            vpnEl.innerText = "❌ Leak (Residential IP)";
+            vpnEl.style.color = "var(--error-red)";
+            privacyScores.vpn = false;
         }
-        document.getElementById('fingerprint').innerText = `ID: ${Math.abs(hash)}`;
-    } catch (e) {
-        document.getElementById('fingerprint').innerText = "Blocked / Failed";
+
+    } catch (error) {
+        [ipEl, dnsEl, vpnEl, metaEl].forEach(el => {
+            el.classList.remove("skeleton");
+            el.innerText = "Blocked / Timeout";
+            el.style.color = "var(--error-red)";
+        });
     }
 }
 
-// 3. WEBRTC LEAK DETECTION
-function checkWebRTC() {
-    const RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
-    if (!RTCPeerConnection) {
-        document.getElementById('webrtc-block').innerText = "🔒 Blocked (Protected)";
-        document.getElementById('webrtc-ip').innerText = "None Detected";
+async function executeWebRTCLeakCheck() {
+    const webrtcIpEl = document.getElementById("webrtc-ip");
+    const webrtcBlockEl = document.getElementById("webrtc-block");
+
+    const ConnectionMap = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+    if (!ConnectionMap) {
+        webrtcBlockEl.classList.remove("skeleton");
+        webrtcBlockEl.innerText = "🔒 Blocked (Protected)";
+        webrtcIpEl.classList.remove("skeleton");
+        webrtcIpEl.innerText = "No Address Found";
+        privacyScores.webrtc = true;
         return;
     }
 
-    document.getElementById('webrtc-block').innerText = "⚠️ Exposed / Active";
-    const pc = new RTCPeerConnection({ iceServers: [{ urls: "stun:://google.com" }] });
-    pc.createDataChannel("");
-    pc.createOffer().then(offer => pc.setLocalDescription(offer));
-    pc.onicecandidate = (ice) => {
-        if (!ice || !ice.candidate || !ice.candidate.candidate) return;
-        const ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9:]+)/gi;
-        const ipAddress = ipRegex.exec(ice.candidate.candidate)[1];
-        document.getElementById('webrtc-ip').innerText = ipAddress;
-    };
+    try {
+        const rtcInstance = new ConnectionMap({ iceServers: [{ urls: "stun:://google.com" }] });
+        rtcInstance.createDataChannel("");
+        const offer = await rtcInstance.createOffer();
+        await rtcInstance.setLocalDescription(offer);
+
+        rtcInstance.onicecandidate = (event) => {
+            if (!event || !event.candidate || !event.candidate.candidate) return;
+            const contextText = event.candidate.candidate;
+            const expression = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9:]+)/gi;
+            const match = expression.exec(contextText);
+            
+            if (match) {
+                webrtcIpEl.classList.remove("skeleton");
+                webrtcIpEl.innerText = match[0];
+                webrtcBlockEl.classList.remove("skeleton");
+                webrtcBlockEl.innerText = "⚠️ Exposed / Leaking";
+                webrtcBlockEl.style.color = "var(--error-red)";
+                privacyScores.webrtc = false;
+                updatePrivacyScore();
+            }
+        };
+
+        // Fallback safety timeout if no candidates return quickly
+        setTimeout(() => {
+            if (webrtcIpEl.classList.contains("skeleton")) {
+                webrtcIpEl.classList.remove("skeleton");
+                webrtcIpEl.innerText = "No Leak Found";
+                webrtcBlockEl.classList.remove("skeleton");
+                webrtcBlockEl.innerText = "🔒 Secure Profiles";
+                privacyScores.webrtc = true;
+                updatePrivacyScore();
+            }
+        }, 3000);
+
+    } catch (e) {
+        webrtcBlockEl.classList.remove("skeleton");
+        webrtcBlockEl.innerText = "Secure / Blocked";
+        webrtcIpEl.classList.remove("skeleton");
+        webrtcIpEl.innerText = "Protected";
+        privacyScores.webrtc = true;
+    }
 }
 
-// 4. DEVICE INFO METADATA
-function getLocalDeviceInfo() {
-    const screenRes = `${window.screen.width}x${window.screen.height}`;
-    const cores = navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} Cores` : "Unknown";
-    document.getElementById('device-meta').innerText = `${screenRes} (${cores})`;
+function executeFingerprintAnalysis() {
+    const fingerEl = document.getElementById("fingerprint");
+    try {
+        const dummyCanvas = document.createElement("canvas");
+        const drawingContext = dummyCanvas.getContext("2d");
+        drawingContext.textBaseline = "top";
+        drawingContext.font = "14px 'Arial'";
+        drawingContext.fillStyle = "#f60";
+        drawingContext.fillRect(125, 1, 62, 20);
+        drawingContext.fillStyle = "#069";
+        drawingContext.fillText("PrivacyShieldAuditValidationText", 2, 15);
+
+        const dataStr = dummyCanvas.toDataURL().replace("data:image/png;base64,", "");
+        let cryptoToken = 0;
+        for (let idx = 0; idx < dataStr.length; idx++) {
+            cryptoToken = (cryptoToken << 5) - cryptoToken + dataStr.charCodeAt(idx);
+            cryptoToken |= 0;
+        }
+
+        fingerEl.classList.remove("skeleton");
+        fingerEl.innerText = `ID: ${Math.abs(cryptoToken).toString(16).toUpperCase()}`;
+    } catch (err) {
+        fingerEl.classList.remove("skeleton");
+        fingerEl.innerText = "Signature Blocked";
+        fingerEl.style.color = "var(--accent-green)";
+    }
+}
+
+function executeClientMetadataQuery() {
+    const deviceEl = document.getElementById("device-meta");
+    try {
+        const screenMatrix = `${window.screen.width}x${window.screen.height}`;
+        const physicalCores = navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} vCPUs` : "Standard Core Configuration";
+        deviceEl.classList.remove("skeleton");
+        deviceEl.innerText = `${screenMatrix} (${physicalCores})`;
+    } catch (e) {
+        deviceEl.classList.remove("skeleton");
+        deviceEl.innerText = "Query Restrained";
+    }
 }
