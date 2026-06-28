@@ -6,6 +6,7 @@
     --accent-green: #10b981;
     --accent-blue: #3b82f6;
     --border: #334155;
+    --error-red: #ef4444;
 }
 
 body {
@@ -49,7 +50,6 @@ h1.topbar-title {
 /* GRID LAYOUT FIX */
 .grid {
     display: grid;
-    /* auto-fill forces uneven rows to maintain consistent card widths */
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 20px;
 }
@@ -88,11 +88,62 @@ h1.topbar-title {
     font-family: monospace;
     font-size: 0.95rem;
     color: var(--accent-green);
-    background: var(--bg-color); /* Linked token background */
+    background: var(--bg-color);
     padding: 12px;
     border-radius: 6px;
     word-break: break-all;
     margin: 0;
+    transition: all 0.3s ease;
+}
+
+/* LIVE PULSING SKELETON ANIMATION */
+.skeleton {
+    color: transparent !important;
+    background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+    background-size: 200% 100%;
+    animation: pulse 1.5s infinite linear;
+}
+
+@keyframes pulse {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ADSENSE PLACEHOLDERS */
+.ad-placeholder {
+    background: #0d1325;
+    border: 1px dashed var(--border);
+    color: var(--text-muted);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    margin: 20px auto;
+    text-align: center;
+}
+.top-ad { max-width: 728px; height: 90px; }
+.mid-ad { max-width: 1100px; height: 120px; margin: 30px auto; }
+
+/* SEO VALUE ACCORDIONS */
+.info-accordion-section { margin-top: 50px; }
+.accordion-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    padding: 14px;
+}
+.accordion-item summary {
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text-main);
+}
+.accordion-item p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 10px 0 0 0;
 }
 
 /* FOOTER */
@@ -105,27 +156,18 @@ h1.topbar-title {
     margin-top: 50px;
 }
 
-/* MOBILE FIRST MOBILE OPTIMIZATIONS */
+/* MOBILE FIRST VIEWPORT TARGETING */
 @media (max-width: 600px) {
-    h1.topbar-title {
-        font-size: 1.1rem;
-    }
-
-    .section-title {
-        font-size: 1.1rem;
-    }
-
-    .grid {
-        grid-template-columns: 1fr; /* Clean block structure for mobile view */
-    }
-
-    .card {
-        padding: 16px;
-    }
-
-    /* Fixed mobile font size to guarantee Google tap/readability approval */
+    h1.topbar-title { font-size: 1.1rem; }
+    .section-title { font-size: 1.1rem; }
+    .grid { grid-template-columns: 1fr; }
+    .card { padding: 16px; }
+    
+    /* Enforced 1rem text size for mobile usability and text wrapping clearance */
     .result-text {
-        font-size: 1rem; 
+        font-size: 1rem;
         padding: 10px;
     }
+    .top-ad { max-width: 320px; height: 50px; }
+    .mid-ad { max-width: 100%; height: 250px; }
 }
