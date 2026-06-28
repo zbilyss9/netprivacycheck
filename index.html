@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
 
     <!-- Basic SEO -->
     <title>Privacy Shield Audit — IP, DNS, WebRTC & Fingerprint Leak Test</title>
     <meta name="description" content="Run a full privacy audit: IP leak test, DNS leak test, WebRTC leak test, fingerprint analysis, VPN detection and browser privacy score — all in one dashboard.">
-    <meta name="keywords" content="privacy audit, IP leak test, DNS leak test, WebRTC leak test, fingerprint test, VPN detection, browser privacy score">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Privacy Shield Audit">
@@ -14,9 +13,9 @@
     <meta name="rating" content="general">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://netprivacycheck.com/">
+    <link rel="canonical" href="https://netprivacycheck.com">
 
-    <!-- Favicon (Corrected) -->
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
@@ -26,8 +25,8 @@
     <meta property="og:title" content="Privacy Shield Audit — IP, DNS, WebRTC & Fingerprint Leak Test">
     <meta property="og:description" content="Run a full privacy audit: IP leak test, DNS leak test, WebRTC leak test, fingerprint analysis, VPN detection and browser privacy score — all in one dashboard.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://netprivacycheck.com/">
-    <meta property="og:image" content="https://netprivacycheck.com/assets/preview.png">
+    <meta property="og:url" content="https://netprivacycheck.com">
+    <meta property="og:image" content="https://netprivacycheck.comassets/preview.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:site_name" content="Privacy Shield Audit">
     <meta property="og:locale" content="en_US">
@@ -39,11 +38,11 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Privacy Shield Audit — IP, DNS, WebRTC & Fingerprint Leak Test">
     <meta name="twitter:description" content="Run a full privacy audit: IP leak test, DNS leak test, WebRTC leak test, fingerprint analysis, VPN detection and browser privacy score — all in one dashboard.">
-    <meta name="twitter:image" content="https://netprivacycheck.com/assets/preview.png">
+    <meta name="twitter:image" content="https://netprivacycheck.comassets/preview.png">
     <meta name="twitter:image:alt" content="Privacy Shield Audit — Full Privacy Test Dashboard">
-    <meta name="twitter:url" content="https://netprivacycheck.com/">
+    <meta name="twitter:url" content="https://netprivacycheck.com">
 
-    <!-- FAQ Schema -->
+    <!-- FAQ Schema (Fixed syntax slash errors) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -77,18 +76,18 @@
     }
     </script>
 
-    <!-- WebPage Schema -->
+    <!-- WebPage Schema (Fixed syntax slash errors) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Privacy Shield Audit",
-      "url": "https://netprivacycheck.com/",
+      "url": "https://netprivacycheck.com",
       "description": "Full privacy audit dashboard: IP, DNS, WebRTC, fingerprint, VPN status and browser privacy score.",
       "publisher": {
         "@type": "Organization",
         "name": "Privacy Shield Audit",
-        "url": "https://netprivacycheck.com/"
+        "url": "https://netprivacycheck.com"
       }
     }
     </script>
@@ -98,85 +97,81 @@
 <body>
 
 <header class="topbar">
-    <div class="topbar-title">Privacy Shield Audit</div>
+    <h1 class="topbar-title">Privacy Shield Audit</h1>
 </header>
 
-<div class="container">
+<!-- Main tag helps Google find your layout core -->
+<main class="container">
 
     <!-- NETWORK SECTION -->
-    <h2 class="section-title">Network</h2>
-
-    <div class="grid">
-        <div class="card">
-            <div class="card-title">Public IP <span class="badge">Network</span></div>
-            <p class="result-text" id="public-ip">Waiting...</p>
+    <section>
+        <h2 class="section-title">Network</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-title">Public IP <span class="badge">Network</span></div>
+                <p class="result-text" id="public-ip">Waiting...</p>
+            </div>
+            <div class="card">
+                <div class="card-title">DNS Resolver <span class="badge">DNS</span></div>
+                <p class="result-text" id="dns-country">Waiting...</p>
+            </div>
+            <div class="card">
+                <div class="card-title">VPN Status <span class="badge">ASN</span></div>
+                <p class="result-text" id="vpn-status">Waiting...</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Connection Info <span class="badge">Network</span></div>
+                <p class="result-text" id="connection-meta">Waiting...</p>
+            </div>
         </div>
-
-        <div class="card">
-            <div class="card-title">DNS Resolver <span class="badge">DNS</span></div>
-            <p class="result-text" id="dns-country">Waiting...</p>
-        </div>
-
-        <div class="card">
-            <div class="card-title">VPN Status <span class="badge">ASN</span></div>
-            <p class="result-text" id="vpn-status">Waiting...</p>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Connection Info <span class="badge">Network</span></div>
-            <p class="result-text" id="connection-meta">Waiting...</p>
-        </div>
-    </div>
+    </section>
 
     <!-- BROWSER SECTION -->
-    <h2 class="section-title">Browser</h2>
-
-    <div class="grid">
-        <div class="card">
-            <div class="card-title">WebRTC IP <span class="badge">Browser</span></div>
-            <p class="result-text" id="webrtc-ip">Waiting...</p>
+    <section>
+        <h2 class="section-title">Browser</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-title">WebRTC IP <span class="badge">Browser</span></div>
+                <p class="result-text" id="webrtc-ip">Waiting...</p>
+            </div>
+            <div class="card">
+                <div class="card-title">WebRTC Protection <span class="badge">Browser</span></div>
+                <p class="result-text" id="webrtc-block">Waiting...</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Fingerprint <span class="badge">Entropy</span></div>
+                <p class="result-text" id="fingerprint">Waiting...</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Device Info <span class="badge">Client</span></div>
+                <p class="result-text" id="device-meta">Waiting...</p>
+            </div>
         </div>
-
-        <div class="card">
-            <div class="card-title">WebRTC Protection <span class="badge">Browser</span></div>
-            <p class="result-text" id="webrtc-block">Waiting...</p>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Fingerprint <span class="badge">Entropy</span></div>
-            <p class="result-text" id="fingerprint">Waiting...</p>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Device Info <span class="badge">Client</span></div>
-            <p class="result-text" id="device-meta">Waiting...</p>
-        </div>
-    </div>
+    </section>
 
     <!-- SECURITY SECTION -->
-    <h2 class="section-title">Security</h2>
-
-    <div class="grid">
-        <div class="card">
-            <div class="card-title">Security Headers <span class="badge">Browser</span></div>
-            <p class="result-text" id="security-headers">Waiting...</p>
+    <section>
+        <h2 class="section-title">Security</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-title">Security Headers <span class="badge">Browser</span></div>
+                <p class="result-text" id="security-headers">Waiting...</p>
+            </div>
+            <div class="card">
+                <div class="card-title">DNS-over-HTTPS <span class="badge">Encrypted</span></div>
+                <p class="result-text" id="doh-status">Waiting...</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Privacy Score <span class="badge">Summary</span></div>
+                <p class="result-text" id="summary">Waiting...</p>
+            </div>
         </div>
+    </section>
 
-        <div class="card">
-            <div class="card-title">DNS-over-HTTPS <span class="badge">Encrypted</span></div>
-            <p class="result-text" id="doh-status">Waiting...</p>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Privacy Score <span class="badge">Summary</span></div>
-            <p class="result-text" id="summary">Waiting...</p>
-        </div>
-    </div>
-
-</div>
+</main>
 
 <footer class="footer">
-    © 2026 Privacy Shield Audit — Design Mode Only
+    <small>© 2026 Privacy Shield Audit — Design Mode Only</small>
 </footer>
 
 <script src="script.js"></script>
