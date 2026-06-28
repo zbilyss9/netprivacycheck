@@ -55,10 +55,13 @@ async function executeNetworkDiagnostics() {
     const vpnEl = document.getElementById("vpn-status");
     const metaEl = document.getElementById("connection-meta");
 
+    // Clear old text placeholders
+    vpnEl.style.color = "";
+
     try {
-        // Universal, unblockable open lookup node configuration
+        // Step 1: Attempt highly detailed primary lookup
         const response = await fetch("https://ipapi.co");
-        if (!response.ok) throw new Error("Fallback execution required");
+        if (!response.ok) throw new Error("API Limit");
         const data = await response.json();
 
         ipEl.classList.remove("skeleton");
@@ -68,46 +71,61 @@ async function executeNetworkDiagnostics() {
         dnsEl.innerText = `${data.city || 'Unknown'}, ${data.country_code || 'UN'}`;
 
         metaEl.classList.remove("skeleton");
-        metaEl.innerText = data.org || "Unknown ISP";
+        metaEl.innerText = data.org || "Unknown Provider";
 
-        vpnEl.classList.remove("skeleton");
-        const orgLower = (data.org || "").toLowerCase();
-        if (orgLower.includes("vpn") || orgLower.includes("hosting") || orgLower.includes("servers") || orgLower.includes("datacenter")) {
-            vpnEl.innerText = "⚠️ VPN Connection Active";
-            vpnEl.style.color = "var(--accent-blue)";
-            privacyScores.vpn = true;
-        } else {
-            vpnEl.innerText = "❌ Leak (Residential IP)";
-            vpnEl.style.color = "var(--error-red)";
-            privacyScores.vpn = false;
-        }
+        processVpnLogic(data.org || "", vpnEl);
 
     } catch (error) {
-        // High-velocity public network fail-safe proxy connection string
+        // Step 2: Honest backup lookup if the primary API fails
         try {
-            const fbRes = await fetch("https://api.seeip.org/jsonip");
+            const fbRes = await fetch("https://ipinfo.io");
+            if (!fbRes.ok) throw new Error("Fallback Limit");
             const fbData = await fbRes.json();
-            
+
             ipEl.classList.remove("skeleton");
-            ipEl.innerText = fbData.ip || "IP Verified";
-            
+            ipEl.innerText = fbData.ip || "Unknown Address";
+
             dnsEl.classList.remove("skeleton");
-            dnsEl.innerText = "Cloudflare Edge Resolver";
-            
-            vpnEl.classList.remove("skeleton");
-            vpnEl.innerText = "🔒 Secure Routing Active";
-            vpnEl.style.color = "var(--accent-green)";
-            privacyScores.vpn = true;
-            
+            dnsEl.innerText = fbData.city && fbData.country ? `${fbData.city}, ${fbData.country}` : "Location Found";
+
             metaEl.classList.remove("skeleton");
-            metaEl.innerText = "Cloudflare Network Frame";
+            metaEl.innerText = fbData.org || "Residential Internet Node";
+
+            processVpnLogic(fbData.org || "", vpnEl);
         } catch (fatalErr) {
+            // Completely offline fallback error tracking
             [ipEl, dnsEl, vpnEl, metaEl].forEach(el => {
                 el.classList.remove("skeleton");
-                el.innerText = "Proxy Endpoint Blocked";
+                el.innerText = "Lookup Rate Restrained";
                 el.style.color = "var(--error-red)";
             });
         }
+    }
+}
+
+function processVpnLogic(providerText, vpnEl) {
+    const orgLower = providerText.toLowerCase();
+    
+    // Scan network metadata string for data centers, cloud hosts, or known commercial relays
+    const isVpn = orgLower.includes("vpn") || 
+                  orgLower.includes("hosting") || 
+                  orgLower.includes("servers") || 
+                  orgLower.includes("datacenter") || 
+                  orgLower.includes("mullvad") || 
+                  orgLower.includes("nord") || 
+                  orgLower.includes("ovh");
+
+    vpnEl.classList.remove("skeleton");
+    
+    if (isVpn) {
+        vpnEl.innerText = "⚠️ VPN Connection Active";
+        vpnEl.style.color = "var(--accent-blue)";
+        privacyScores.vpn = true;
+    } else {
+        // Honest truth displayed to your home users
+        vpnEl.innerText = "❌ Unprotected Connection";
+        vpnEl.style.color = "var(--error-red)";
+        privacyScores.vpn = false;
     }
 }
 
