@@ -60,7 +60,7 @@ async function executeNetworkDiagnostics() {
     const metaEl = document.getElementById("connection-meta");
 
     try {
-        // Querying an open, zero-restriction network node to read the connection packet
+        // Querying the official, restriction-free API endpoint format to read the payload packet
         const response = await fetch("https://seeip.org");
         if (!response.ok) throw new Error("Connection Interrupted");
         const data = await response.json();
